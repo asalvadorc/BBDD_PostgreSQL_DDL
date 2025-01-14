@@ -97,7 +97,7 @@ N8008BA | Base Tt Lateral Niessen Trazo Bla | 4.38 | 6 | 6 | Niessen
 306 | SAMPEDRO SIMO, MARIA MERCEDES | FINELLO, 161 | 12217 |   
 387 | TUR MARTIN, MANUEL FRANCISCO | CALLE PEDRO VIRUELA, 108-8 | 12008 |   
   
-**Ex_21** Inserir la següent factura:
+**Ex_20** Inserir la següent factura:
 
 **num_f** | **data** | **cod_cli** | **cod_ven** | **iva** | **dte**  
 ---|---|---|---|---|---  
@@ -107,7 +107,7 @@ N8008BA | Base Tt Lateral Niessen Trazo Bla | 4.38 | 6 | 6 | Niessen
 ---|---|---|---|---|---  
 6535 | 1 | L16555 | 2 | 5.89 | 25  
   
-**Ex_22** Inserir la següent factura (aquesta té més d'una línia de factura).
+**Ex_21** Inserir la següent factura (aquesta té més d'una línia de factura).
 
 **num_f** | **data** | **cod_cli** | **cod_ven** | **iva** | **dte**  
 ---|---|---|---|---|---  
@@ -118,14 +118,14 @@ N8008BA | Base Tt Lateral Niessen Trazo Bla | 4.38 | 6 | 6 | Niessen
 6559 | 1 | IM2P10L | 3 | 14.84 |   
 6559 | 2 | N8008BA | 6 | 4.38 | 20  
   
-**Ex_23** Esborrar la factura **6559**. Comprovar que també s'han esborrat les
+**Ex_22** Esborrar la factura **6559**. Comprovar que també s'han esborrat les
 seues línies de factura
 
-**Ex_24** Esborrar els articles dels quals **no** tenim**stock mínim**.
+**Ex_23** Esborrar els articles dels quals **no** tenim**stock mínim**.
 
-**Ex_25** Llevar tots els codis postals dels clients.
+**Ex_24** Llevar tots els codis postals dels clients.
 
-**Ex_26** Pujar el preu dels articles de la categoria **BjcOlimpia** un **5%**
+**Ex_25** Pujar el preu dels articles de la categoria **BjcOlimpia** un **5%**
 (el resultat serà que l'únic article d'aquesta categoria haurà passat d'un
 preu de 4.38 a **4.60€**)
 

@@ -142,7 +142,7 @@ que es posen en la mateixa definició del camp) i les que afecten o poden
 afectar a més d'un camp, que s'han de definir separadament de la definició
 dels camps. Comencem per les primeres, per ser més senzilles d'entendre:
 
-**Restriccions de camp únic**{.azul}
+### 2.3.1 Restriccions de camp únic
 
 Són restriccions que es posen en la mateixa definició del camp i només
 afectaran a aquest camp: van per tant després del tipus de dades del camp i
@@ -158,6 +158,8 @@ d'inventar-nos noms per a les restriccions, però després ens limitaria a que
 no podríem retocar aquestes restriccions.
 
 Els tipus de restriccions que podem definir són:
+
+**Restricció de clau principal**{.azul}
 
   * **PRIMARY KEY** : el camp serà clau principal.
 
@@ -187,6 +189,8 @@ Els tipus de restriccions que podem definir són:
 >> Tingueu en compte també que si la taula ja existia donarà un error. Només
 heu d'esborrar-la primer.
 
+**Restricció d'unicitat**{.azul}
+
   * **UNIQUE** : el camp serà únic, és a dir, no es podrà agafar dues vegades el mateix valor en aquest camp (_Indexat sense duplicats_ en Access). PostgreSQL generarà automàticament un índex per a aquest camp. Veurem què és un índex en la pregunta 6.
 
 > Per exemple, d'aquesta manera definiríem la taula EMPLEAT3 amb la restricció
@@ -202,6 +206,8 @@ heu d'esborrar-la primer.
             poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
             data_incorporacio DATE DEFAULT CURRENT_DATE )
 
+**Restricció de valor no nul**{.azul}
+
   * **NOT NULL** : el camp no podrà agafar un valor nul (_Requerido_ en Access). Hem de ser conscients que no val la pena definir com a no nula la clau principal, ja que per definició ja ho és.
 
 > Per exemple, d'aquesta manera definirem que el camp **nom** ha de ser no
@@ -215,6 +221,8 @@ heu d'esborrar-la primer.
             departament INT2 ,  
             poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
             data_incorporacio DATE DEFAULT CURRENT_DATE )
+
+**Restricció d'integritat referencial**{.azul}
 
   * **REFERENCES** : servirà per a definir que aquest camp és una clau externa. Haurem d'especificar obligatòriament la taula a la qual apunta, i opcionalment podem posar entre parèntesis el camp de la taula al qual apunta, encara que si no ho posem, per defecte apuntarà a la clau principal (i nosaltres sempre voldrem apuntar a la clau principal).
 
@@ -245,7 +253,7 @@ heu d'esborrar-la primer.
 > definir la clau externa. La manera de posar-les en SQL i el significat són
 > les següents:
 >
-  * **NO ACTION** : no es deixarà esborrar o modificar de la taula
+  - **NO ACTION** : no es deixarà esborrar o modificar de la taula
 > principal si en té alguna fila relacionada. És l'opció per defecte. Així en
 > l'exemple d'EMPLEAT3, amb una clau externa que apunta a DEPARTAMENT, si
 > intentem esborrar o modificar el numero d'un departament que té empleats,
@@ -253,7 +261,7 @@ heu d'esborrar-la primer.
 > una altra taula no es pot esborrar o modificar.
 >
 
->  * **CASCADE** : s'esborraran (o modificaran) en cascada els registres
+>  - **CASCADE** : s'esborraran (o modificaran) en cascada els registres
 > relacionats de la taula on està la clau externa. S'especificarà amb **ON
 > DELETE CASCADE** o **ON UPDATE CASCADE**.
 
@@ -274,7 +282,7 @@ heu d'esborrar-la primer.
 > la taula EMPLEAT3 per a aquells que abans teníen un 5.
 >
 
->   * **SET NULL** : posarà a nul el camp que és clau externa dels registres
+>   - **SET NULL** : posarà a nul el camp que és clau externa dels registres
 > que estiguen relacionats amb l'esborrat o modificat de la taula principal.
 > Així, si férem la següent definició de la taula EMPLEAT3
 
@@ -292,6 +300,10 @@ heu d'esborrar-la primer.
 > restricció d'integritat, i posaria a nul el departament d'aquells empleats
 > que abans eren del departament 5.
 >
+
+   >-  **SET DEFAULT**: Estableix les columnes que referencien als seus valors per defecte. Ha d'existir una fila en la taula referenicada que coincidixca amb els valors per defecte, si no són NULL, o l'opració fallarà.
+
+**Restricció externa**{.azul}
 
   * **CHECK** : farà una comprovació per a validar els valors introduïts per a aquest camp. La condició de validació ha d'anar entre parèntesis, i ha de ser una expressió, normalment de comparació del camp en qüestió amb algun valor.
 
