@@ -310,10 +310,9 @@ dades numèric, podria agafar el valor 0 o valors negatius)
 Evidentment es pot posar més d'una restricció en la definició d'una taula. En
 aquest exemple arrepleguem totes les anteriors, és a dir, definim la taula
 **EMPLEAT3** amb tots els seus camps, i definint la _clau principal_
-(**dni**), amb el camp **nom** _únic_ , amb el **sou** _estrictament positiu_
-, i amb el camp **departament** que serà _clau externa_ que apunta a la taula
+(**dni**), amb el camp **nom** _únic_ , amb el **sou** _estrictament positiu_, i amb el camp **departament** que serà _clau externa_ que apunta a la taula
 DEPARTAMENT. Per complicar-lo un poc més també exigirem que el camp **nom**
-siga _no nul_ , i així veure que es pot posar més d'una restricció en un camp.
+siga _no nul_, i així veure que es pot posar més d'una restricció en un camp.
 
     CREATE TABLE EMPLEAT3  
             ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY ,  
