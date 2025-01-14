@@ -1,0 +1,28 @@
+site_url : https://github.com/asalvadorc/BBDD_POSTGRES_DDL
+site_name: BD - Bases de Dades
+theme: 
+  name: readthedocs
+  logo: assets/logocaminas.png
+
+extra_css:
+  - css/extra.css
+  - img/favicon.ico 
+
+markdown_extensions:
+  - admonition
+  - pymdownx.emoji
+  - pymdownx.extra
+  - pymdownx.superfences
+  - tables    
+  - attr_list
+  - toc 
+
+nav:
+  #- SQL - DDL :
+  - 1. Introducció: 31_introducci.md
+  - 2. DDL: 32_ddl.md
+  - Exercicis del tot el tema: exercicis_de_tot_el_tema.md
+  #- Consultes d'actualització:
+  #  - 3. Consultes d'actualització: 33_consultes_dactualitzaci.md
+  #  
+    
