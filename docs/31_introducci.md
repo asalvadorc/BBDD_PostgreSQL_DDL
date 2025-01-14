@@ -1,4 +1,4 @@
-# 1 Introducció
+# 1. Introducció
 
 Fins el moment només hem vist una sentència, el SELECT, una sentència molt
 potent per a poder consultar el contingut de les taules d'una Base de Dades.

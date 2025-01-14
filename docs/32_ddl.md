@@ -1,4 +1,4 @@
-#
+# 2. DDL
 
 **DDL**(_Data Definition Language_) o **Llenguatge de Definició de Dades** és
 el conjunt de sentències que ens permeten definir, retocar o esborrar
@@ -50,7 +50,7 @@ Permet crear una nova taula. Obligatòriament s'hauran d'especificar els camps
 i els tipus de dades de cada camp. Òbviament, una vegada creada la taula
 estarà buida, sense cap fila.
 
-**Sintaxi**
+**<u>Sintaxi</u>**
 
     CREATE TABLE taula  
     ( camp1 tipus [(grandària)] [DEFAULT valor] [restricció11] [restricció12] [...]  
@@ -69,7 +69,7 @@ parèntesis, separant per comes la definició de cada camp.
 
   * Podem posar opcionalment restriccions a cada camp. Hauran d'anar abans de la coma que separa del següent camp. També poden haver restriccions que afecten a més d'un camp, que preferiblement posarem al final de la definició de la taula. Veurem les restriccions en el següent punt.
 
-**Exemples**{.rojo}
+**<u>Exemples</u>**
 
 Si voleu practicar aquestos exemples, feu-lo sobre la Base de Dades **proves**
 (usuari **proves** , contrasenya **proves**). Si us dóna error perquè la taula
@@ -117,13 +117,11 @@ En la Base de Dades anomenada **f_grup_9999x** (on grup és el vostre grup,
 9999 són les 4 últimes xifres del vostre DNI, i x la lletra del NIF),
 connectant com un usuari amb el mateix nom i contrasenya:
 
-> **6.77** Creeu la taula **CATEGORIA** , amb els mateixos camps i del mateix
+> **Ex_1** Creeu la taula **CATEGORIA** , amb els mateixos camps i del mateix
 > tipus que en la taula CATEGORIA de **FACTURA** , però de moment sense clau
-> principal ni cap altra restricció. Guardeu la consulta de creació com
-> **Ex_6_77.sql**
+> principal ni cap altra restricció.
 >
-> **6.78** Creeu la taula **ARTICLE** , també sense restriccions. Guardar la
-> consulta com **Ex_6_78.sql**
+> **Ex_2** Creeu la taula **ARTICLE** , també sense restriccions. 
 
 !!!note "Nota"
     Durant tots aquestos exercicis de DDL pot ser molt convenient tenir obertes
@@ -150,7 +148,7 @@ Són restriccions que es posen en la mateixa definició del camp i només
 afectaran a aquest camp: van per tant després del tipus de dades del camp i
 abans de la coma de separació dels camps.
 
-**sintaxi**
+**<u>Sintaxi</u>**
 
       [ CONSTRAINT nom ] {PRIMARY KEY | UNIQUE | NOT NULL | REFERENCES taula2 [(camp1)] | CHECK (_condició_)}
 
@@ -343,7 +341,7 @@ són restriccions de camp. Són restriccions que van dins de la definició d'una
 taula però fora de la definició d'un camp, i que poden afectar a un o més d'un
 camp. S'haurà de definir expressament a quin o quins camps afecten.
 
-La sintaxi general, en aquesta ocasió és
+**<u>Sintaxi</u>**
 
       [ CONSTRAINT nom ] {PRIMARY KEY | UNIQUE | FOREIGN KEY | CHECK (_condicio_)} (c11 [,c12][,...])   
       [ REFERENCES taula2 [ (c21 [,c22][,...]) ] ]  
@@ -492,22 +490,22 @@ empleats, perquè no hi ha un altre remei, i també la de no repetició del camp
 En **f_grup_9999x** (on grup és el vostre grup, 9999 són les 4 últimes xifres
 del vostre DNI, i x la lletra del NIF)
 
-> **6.79** Crear la taula **PROVINCIA** , amb la clau principal****.
+> **Ex_3** Crear la taula **PROVINCIA** , amb la clau principal****.
 >
-> **6.80** Crear la taula **POBLE** , amb la clau principal i la restricció
+> **Ex_4** Crear la taula **POBLE** , amb la clau principal i la restricció
 > que el camp **cod_pro** és clau externa que apunta a PROVINCIA.
 >
-> **6.81** Crear la taula **VENEDOR** , amb la clau principal i la clau
+> **Ex_5** Crear la taula **VENEDOR** , amb la clau principal i la clau
 > externa a POBLE (de moment no definim la clau externa a VENEDOR, que és
 > reflexiva).
 >
-> **6.82** Crear la taula **CLIENT** , amb la clau principal i la clau externa
+> **Ex_6** Crear la taula **CLIENT** , amb la clau principal i la clau externa
 > a POBLE
 >
-> **6.83** Crear la taula **FACTURA** , amb la clau principal i les claus
+> **Ex_7** Crear la taula **FACTURA** , amb la clau principal i les claus
 > externes a CLIENT i VENEDOR. També heu d'exigir que **cod_cli** siga no nul.
 >
-> **6.84** Crear la taula **LINIA_FAC** , amb la clau principal (observa que
+> **Ex_8** Crear la taula **LINIA_FAC** , amb la clau principal (observa que
 > està formada per 2 camps) però de moment sense la clau externa que apunta a
 > ARTICLE. A més **cod_a** ha de ser no nul.
 
@@ -518,7 +516,7 @@ Permet modificar l'estructura d'una taula ja existent, bé afegint, llevant o
 modificant camps (columnes), bé afegint o llevant restriccions. També servirà
 per a canviar el nom d'un camp i fins i tot canviar el nom de la taula
 
-**Sintaxi**
+**<u>Sintaxi</u>**
 
 Per a alterar l'estructura d'algun camp o restricció utilitzarem aquesta
 sintaxi:
@@ -555,7 +553,7 @@ Si volem afegir una columna o una restricció, l'haurem de definir totalment.
 Podem fer dues coses: modificar el tipus del camp o modificar el valor per
 defecte (posar valor per defecte o llevar-lo)
 
-Per a canviar el tipus haurem d'utilitzar la sintaxi**... ALTER COLUMN _camp_
+Per a canviar el tipus haurem d'utilitzar la **sintaxi**... ALTER COLUMN _camp_
 TYPE _nou_tipus_ **. Per exemple anem a fer que el camp poblacio siga de 25
 caràcters
 
@@ -565,12 +563,12 @@ caràcters
 Canviar el tipus de dades és automàtic quan els tipus són compatibles entre
 ells. Si no ho són ens donarà error, però segurament ho podrem esquivar amb la
 clàusula**USING** , que ens permet posar a continuació el camp i aprofitem per
-a posar un **operador de conversió de tipus** (**::**) amb aquesta sintaxi:
+a posar un **operador de conversió de tipus** (**::**) amb aquesta **sintaxi**:
 
       ALTER TABLE _TAULA_  
       ALTER COLUMN _camp_ TYPE _tipus_nou_ USING _camp_ ::_tipus_nou_
 
-Per a canviar el valor per defecte utilitzarem la sintaxi: **... ALTER COLUMN _camp_ {SET | DROP} DEFAULT [_expressió_] **
+Per a canviar el valor per defecte utilitzarem la **sintaxi**: **... ALTER COLUMN _camp_ {SET | DROP} DEFAULT [_expressió_] **
 
       ALTER TABLE EMPLEAT3  
       ALTER COLUMN poblacio DROP DEFAULT
@@ -602,7 +600,7 @@ Ara li posarem el nom EMP3 a la taula EMPLEAT3
       ALTER TABLE EMPLEAT3  
       RENAME TO EMP3
 
-**Exemples**{.rojo}
+**<u>Exemples</u>**
 
   1) Modificar la taula **EMP3** per afegir el camp cp (codi postal) de tipus text de 5 caràcters.
 
@@ -635,17 +633,17 @@ Ara li posarem el nom EMP3 a la taula EMPLEAT3
 En **f_grup_9999x** (on grup és el vostre grup, 9999 són les 4 últimes xifres
 del vostre DNI, i x la lletra del NIF)
 
-**6.85** Afegir un camp a la taula **VENEDOR** anomenat **alies** de tipus
+**Ex_9** Afegir un camp a la taula **VENEDOR** anomenat **alies** de tipus
 text, que ha de ser no nul i únic.
 
-**6.86** Esborrar el camp anterior, **alies** , de la taula **VENEDOR**.
+**Ex_10** Esborrar el camp anterior, **alies** , de la taula **VENEDOR**.
 
-**6.87** Afegir la clau principal de **CATEGORIA**.
+**Ex_11** Afegir la clau principal de **CATEGORIA**.
 
-**6.88** En la taula **ARTICLE** afegir la clau principal i la clau externa a
+**Ex_12** En la taula **ARTICLE** afegir la clau principal i la clau externa a
 CATEGORIA.
 
-**6.89** En la taula **LINIA_FAC** afegir la clau externa que apunta a
+**Ex_13** En la taula **LINIA_FAC** afegir la clau externa que apunta a
 FACTURA, **exigint que s'esborre en cascada** (si s'esborra una factura,
 s'esborraran automàticament les seues línies de factura). I també la clau
 externa que apunta a ARTICLE (aquesta normal, és a dir NO ACTION)
@@ -660,11 +658,11 @@ Ens servirà per esborrar absolutament una taula, tant les dades com
 l'estructura. S'ha d'anar amb compte amb ella, perquè és una operació que no
 es pot desfer, i per tant potencialment molt perillosa.
 
-**Sintaxi**
+**<u>Sintaxi</u>**
 
       DROP TABLE taula
 
-**Exemples**{.rojo}
+**<u>Exemples</u>**
 
       DROP TABLE FAMILIAR
 
@@ -723,7 +721,7 @@ ens convinga:
 
   * **LAST** : els valors nuls estaran al final de tot, després de qualsevol altre valor. És l'opció per defecte quan l'ordre és ascendent.
 
-**Exemples**{.rojo}
+**<u>Exemples</u>**
 
   1) Crear un índex en la taula **EMPLEAT4** per al camp **departament** en ordre ascendent .
 
@@ -746,10 +744,10 @@ nom de l'índex i la taula on està definit.
 En **f_grup_9999x** (on grup és el vostre grup, 9999 són les 4 últimes xifres
 del vostre DNI, i x la lletra del NIF)
 
-**6.90** Afegir un índex anomenat **i_nom_cli** a la taula **CLIENT** pel camp
+**Ex_14** Afegir un índex anomenat **i_nom_cli** a la taula **CLIENT** pel camp
 **nom**.
 
-**6.91** Afegir un índex anomenat**i_adr_ven** a la taula **VENEDOR** per a
+**Ex_15** Afegir un índex anomenat**i_adr_ven** a la taula **VENEDOR** per a
 que estiga ordenat per **cp** (ascendent) i **adreca**(descendent).
 
 ## 2.7 Vistes
@@ -759,7 +757,7 @@ particulars de la B.D. Es correspon al nivell extern de l'arquitectura a tres
 nivells. Les taules, que són les que realment contenen les dades i donen la
 visió global de la B.D., corresponen al nivell conceptual.
 
-La **sintaxi** bàsica és la següent:
+**<u>Sintaxi</u>**
 
       CREATE VIEW _nom_vista_  
         AS _subconsulta_  
@@ -818,7 +816,7 @@ Per exemple, per a esborrar la vista anterior:a esborrar una vista
 En **f_grup_9999x** (on grup és el vostre grup, 9999 són les 4 últimes xifres
 del vostre DNI, i x la lletra del NIF)
 
-**6.92** Crear la vista **RESUM_FACTURA** , que ens dóne el total dels diners
+**Ex_16** Crear la vista **RESUM_FACTURA** , que ens dóne el total dels diners
 de la factura, el total després del descompte d'articles, i el total després
 del descompte de la factura, tal i com teníem en la consulta **6.56**. A
 partir d'aquest moment podrem utilitzar la vista per a traure aquestos
