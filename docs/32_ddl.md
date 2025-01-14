@@ -344,7 +344,7 @@ EMPLEAT3 a la taula DEPARTAMENT_. Si tenim un criteri clar per als noms de les
 restriccions, si després les volem desactivar temporalment o senzillament
 esborrar-les, ho podrem fer des de SQL.
 
-**Restriccions de camp múltiple**{.azul}
+### 2.3.2 Restriccions de camp múltiple
 
 També s'anomenen restriccions de taula, en contraposició a les anteriors, que
 són restriccions de camp. Són restriccions que van dins de la definició d'una
@@ -364,6 +364,8 @@ Observeu que ara sempre especifiquem el o els camps afectats.
 
 Els tipus de restriccions són els mateixos que en el cas anterior, però la
 sintaxi variarà lleugerament:
+
+**Restricció de clau principal**{.azul}
 
   * **PRIMARY KEY** : posarem entre parèntesis el camp o camps (en aquest cas separats per comes) que seran clau principal.
 
@@ -406,6 +408,9 @@ sintaxi variarà lleugerament:
 > claus principals. La clau principal és única, això sí formada per 2 camps en
 > aquesta ocasió.
 
+
+**Restricció d'unicitat**{.azul}
+
   * **UNIQUE** : ara posarem entre parèntesis el o els camps que seran únics (en el seu conjunt). PostgreSQL generarà automàticament un índex per a aquesta combinació de camps. Veurem què és un índex en la pregunta 6.
 
 > Per exemple, modifiquem la definició de EMPLEAT3 (anomenant-la EMPLEAT4) ,
@@ -421,10 +426,14 @@ sintaxi variarà lleugerament:
             departament INT2 ,  
             CONSTRAINT u_nom4 UNIQUE (cognoms,nom) )
 
+**Restricció de valor no nul**{.azul}
+
   * **NOT NULL**.
 
 > No existeix aquesta opció com a restricció múltiple. Per tant s'ha de
 > definir sempre com a restricció de camp únic.
+>
+**Restricció d'integritat referencial**{.azul}
 
   * **FOREIGN KEY** : servirà per a definir que aquest o aquestos camps són una clau externa. És la que més varia en la seua sintaxi, ja que hem d'especificar tant el o els camps d'aquesta taula que són clau externa, com la taula a la qual apunta (i en tot cas el o els camps on s'apunta, encara que si no ho posem apuntarà a la clau principal de l'altra taula, cosa que voldrem sempre):
 
@@ -442,6 +451,8 @@ sintaxi variarà lleugerament:
             poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
             data_incorporacio DATE DEFAULT CURRENT_DATE ,  
             CONSTRAINT ce_emp3_dep FOREIGN KEY (departament) REFERENCES DEPARTAMENT )
+
+**Restricció externa**{.azul}
 
   * **CHECK** : ara la condició de validació podrà afectar a més d'un camp
 
@@ -715,6 +726,8 @@ automàticament.
 En PostgreSQL la creació d'índex és molt completa. Anem a veure una versió
 resumida:
 
+**<u>Sintaxi</u>**
+
         CREATE [UNIQUE] INDEX nom_índex  
              ON taula (c1 [ASC|DESC][, c2 [ASC|DESC], ...] [NULLS { FIRST | LAST }] )
 
@@ -767,6 +780,8 @@ particulars de la B.D. Es correspon al nivell extern de l'arquitectura a tres
 nivells. Les taules, que són les que realment contenen les dades i donen la
 visió global de la B.D., corresponen al nivell conceptual.
 
+**Creació d'una vista**{.azul}
+
 **<u>Sintaxi</u>**
 
       CREATE VIEW _nom_vista_  
@@ -813,6 +828,8 @@ comarques amb 5 o menys pobles:
         FROM COMARQUES , ESTADISTICA  
         WHERE COMARQUES.nom_c=ESTADISTICA.nom_c and num_p <= 5;
 
+**Esborrar una vista**{.azul}
+
 Per a esborrar una vista
 
       DROP VIEW _nom_vista_
@@ -854,8 +871,13 @@ funcions.
 
 ### 2.8.1 Seqüències
 
-També es poden crear seqüències (**SEQUENCE)** , que són objectes que agafen
+**Creació d'una seqüència**{.azul}
+
+També es poden crear seqüències (**SEQUENCE**) , que són objectes que agafen
 valors numèrics que van incrementant-se (com l'autonumèric).
+
+**<u>Sintaxi</u>**
+
 
       CREATE SEQUENCE _nom_seqüència_  
         [START WITH _valor_inicial_]  
@@ -934,6 +956,8 @@ Com comentàvem, el valor introduït per la seqüència serà **1** :
 Tornarem a veure aquest exemple en les consultes d'actualització, concretament
 el **INSERT**.
 
+**Esborrar una seqüència**{.azul}
+
 Per a esborrar una seqüència utilitzarem la sentència **DROP SEQUENCE** :
 
       DROP SEQUENCE s_num_fac
@@ -953,10 +977,17 @@ Habitualment es posa senzillament un tipus de dades. Però el model relacional
 teòric és més restrictiu, i els dominis encara podrien ser subconjunts
 d'aquestos tipus de dades.
 
+**Creació d'un  domini**{.azul}
+
 Normalment aquestos subconjunts es realitzen per mig dels **_check_** , que
 permeten una regla de validació (una condició) per a donar les dades com a
 bones (per exemple, un sou sempre és positiu, per tant, a banda de fer que
 siga numèric podríem obligar a que fóra positiu).
+
+**<u>Sintaxi</u>**
+
+      CREATE DOMAIN nom AS data_tipus  
+            [CHECK(expresió)| NOT NULL | NULL ];
 
 PostgreSQL permet definir dominis, que seran d'un determinat tipus base, d'una
 grandària determinada (opcional), amb un valor per defecte (opcional) i fins i
@@ -1028,7 +1059,18 @@ Però no hi ha problema si les dades són correctes.
 
 ![](T6_3_2_8_2_3.png)
 
+**Esborrar un domini**{.azul}
+
 Per a esborrar un domini, utilitzarem DROP DOMAIN.
+
+**<u>Sintaxi</u>**
+
+      DROP DOMAIN [IF EXISTS] nom [CASCADE | RESTRICT]
+
+
+>>* RESTRICT rebutja eliminar el domini si hi ha objectes que depenen d'ell. Aquest és el valor predeterminat.
+
+**<u>Exemple</u>**
 
       DROP DOMAIN sou;
 
@@ -1051,16 +1093,22 @@ tipus de dades personals.
 
 Tres són les maneres de crear un tipus de dades: compost, enumerat i extern.
 
-  * El **compost** és com un registre, on s'especifiquen els camps i els tipus.
-
+  * **Compost** és com un registre, on s'especifiquen els camps i els tipus.
   * **Enumenat** : posarem els possibles valors entre parèntesis.
+  * **Extern** és molt més complet i complex que permet crear un nou tipus base, amb una estructura interna i amb funcions, normalment creades en C, d'entrada (per a introduir la dada) i eixida (per a representar-la), d'anàlisi, ... Aquest tipus s'escapa dels objectius d'aquest curs
 
-* L'**extern** és molt més complet i complex que permet crear un nou tipus base, amb una estructura interna i amb funcions, normalment creades en C, d'entrada (per a introduir la dada) i eixida (per a representar-la), d'anàlisi, ... Aquest tipus s'escapa dels objectius d'aquest curs
+**Creació de tipus de data Compost**{.azul}
 
-**Compost**{.azul}
+**<u>Sintaxi</u>**
 
 Posarem entre parèntesi el nom dels camps i el tipus que formaran part
-d'aquest tipus compost. Per exemple, sobre la Base de Dades **proves** :
+d'aquest tipus compost.
+
+      CREATE TYPE nom AS ([nom_camp tipo_camp] [,..])
+
+**<u>Exemple</u>**
+
+Per exemple, sobre la Base de Dades **proves** :
 
       CREATE TYPE num_complex AS (a float4, b float4);
 
@@ -1112,11 +1160,13 @@ Per a accedir als camps dels tipus compostos, bé ja definits, bé definits per
 nosaltres, haurem de posar el nom de la columna seguida d'un punt i seguit del
 nom del camp. Però en les sentències SQL se'ns presenta un problema: que
 aquesta sintaxi serveix per a posar també el nom de la taula seguit del nom de
-la columna. Així per exemple ens donarà error la següent sentència, en la que
+la columna. 
+
+Així per exemple ens donarà **error**{.rojo} la següent sentència, en la que
 volem traure el nom de la població, la latitud i si està en l'hemisferi nord o
 sud:
 
-  **SELECT nom, latitud, latitud.h FROM POBLACIONS3;**{.rojo}
+      SELECT nom, latitud, latitud.h FROM POBLACIONS3;
 
 L'error el dóna perquè en latitud.h espera que latitud siga una taula i h una
 columna. La manera d'esquivar aquest error és posar entre parèntesis la
@@ -1127,13 +1177,18 @@ columna:
 En el tema següent, el de programació en PL/pgSQL veurem que allà no caldrà
 posar els parèntesis, perquè no hi haurà la confusió de taula.columna
 
-**Enumerat**{.azul}
+**Creació de tipus de data Enumerat**{.azul}
 
 El tipus enumerat és un conjunt de dades estàtiques definides en el moment de
 la creació del tipus, amb un ordre també predefinit. Està disponible des de la
 versió **8.3** de PostgreSQL.
 
-Ací tenim un exemple:
+**<u>Sintaxi</u>**
+
+CREATE TYPE nom AS ENUM
+      ('element' [,...])
+
+**<u>Exemple</u>**
 
       CREATE TYPE d_set AS ENUM
         ('dilluns','dimarts','dimecres','dijous','divendres','dissabte','diumenge');
@@ -1150,7 +1205,8 @@ els definits. I s'ha de respectar majúscules i minuscules.
 
       INSERT INTO HORARI VALUES (1,'dimarts',10);
 
-En canvi, aquesta donaria error:
+En canvi, aquesta donaria **error**{.rojo}:
+
 
       INSERT INTO HORARI VALUES (2,'Dimecres',12);
 
@@ -1172,6 +1228,8 @@ I com també es pot comprovar en aquesta sentència:
 
 on només eixiran les files corresponents al dimecres i al divendres (files 2 i
 4).
+
+**Esborrar tipus de dades**{.azul}
 
 Per últim, anem a esborrar els objectes que hem creat, per a no interferir amb
 els companys:
