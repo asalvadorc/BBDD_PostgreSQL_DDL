@@ -53,10 +53,10 @@ estarà buida, sense cap fila.
 **<u>Sintaxi</u>**
 
     CREATE TABLE taula  
-    ( camp1 tipus [(grandària)] [DEFAULT valor] [restricció11] [restricció12] [...]  
-    [, camp2 tipus [(grandària)] [DEFAULT valor] [restricció21] [restricció22][...]  
-    [, ...]]  
-    [, restricciómultiple1 [, ...]] )
+      ( camp1 tipus [(grandària)] [DEFAULT valor] [restricció11] [restricció12] [...]  
+      [, camp2 tipus [(grandària)] [DEFAULT valor] [restricció21] [restricció22][...]  
+      [, ...]]  
+      [, restricciómultiple1 [, ...]] )
 
 Podem observar que la definició de l'estructura de la taula va entre
 parèntesis, separant per comes la definició de cada camp.
@@ -83,22 +83,22 @@ executar la sentència.
   2) Crear una taula anomenada **EMPLEAT2** amb un camp text de 10 caràcters anomenat **dni** ; un altre camp de tipus text de llargària predeterminada (255) anomenat **nom;** un altre camp anomenat **data_naixement** de tipus data; un altre anomenat **sou** de tipus numèric, amb 6 xifres significatives, de les quals 2 ha de ser de la part fraccionària i un últim anomenat **departament** de tipus numèric menudet (INT2 o SMALLINT).
 
       CREATE TABLE EMPLEAT2  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 )
 
   3) Crear una taula anomenada **EMPLEAT3** com el de l'exemple anterior, però amb dos camps més al final: un camp anomenat **poblacio** de tipus text de 50 caràcters, i amb el valor per defecte **Castelló** i un últim anomenat **data_incorporacio** de tipus data i valor per defecte la data d'avui
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE )
 
 ### :pencil2:Exercicis
 
@@ -168,13 +168,13 @@ Els tipus de restriccions que podem definir són:
 > actual)
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE )
+            ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE )
 
 !!!Note "Nota"
     Podeu comprovar que si no poseu nom a la restrició, és a dir si poseu
@@ -194,13 +194,13 @@ heu d'esborrar-la primer.
 > en la BD **proves** , i si ja existeix l'esborreu primer):
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR CONSTRAINT u_nom UNIQUE,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR CONSTRAINT u_nom UNIQUE,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE )
 
   * **NOT NULL** : el camp no podrà agafar un valor nul (_Requerido_ en Access). Hem de ser conscients que no val la pena definir com a no nula la clau principal, ja que per definició ja ho és.
 
@@ -208,13 +208,13 @@ heu d'esborrar-la primer.
 > nul.
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR CONSTRAINT nn_nom NOT NULL ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR CONSTRAINT nn_nom NOT NULL ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE )
 
   * **REFERENCES** : servirà per a definir que aquest camp és una clau externa. Haurem d'especificar obligatòriament la taula a la qual apunta, i opcionalment podem posar entre parèntesis el camp de la taula al qual apunta, encara que si no ho posem, per defecte apuntarà a la clau principal (i nosaltres sempre voldrem apuntar a la clau principal).
 
@@ -224,22 +224,21 @@ heu d'esborrar-la primer.
 > DEPARTAMENT, sinó donarà error:
 
       CREATE TABLE DEPARTAMENT  
-      ( num_d INT2 CONSTRAINT cp_dep PRIMARY KEY ,  
-      nom_d VARCHAR(50) ,  
-      director VARCHAR(10) ,  
-      data DATE );
+            ( num_d INT2 CONSTRAINT cp_dep PRIMARY KEY ,  
+            nom_d VARCHAR(50) ,  
+            director VARCHAR(10) ,  
+            data DATE );
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE );
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE );
 
-> Com ja es va veure en el tema 3 (Model Relacional) i en el tema 5 (Access),
-> hi ha 3 maneres d'actuar quan s'esborra o es modifica una fila de la taula
+> Com ja es va veure en el tema del Model Relacional (restriccions d'integritat referencial), hi ha 3 maneres d'actuar quan s'esborra o es modifica una fila de la taula
 > principal que té associades files en la taula relacionada per mig de la clau
 > externa. Per exemple, què fem amb els familiars d'un empleat si esborrem
 > l'empleat? Aquestes maneres d'actuar s'han d'especificar en el moment de
@@ -259,14 +258,14 @@ heu d'esborrar-la primer.
 > DELETE CASCADE** o **ON UPDATE CASCADE**.
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ON DELETE
-      CASCADE ON UPDATE CASCADE ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ON DELETE
+            CASCADE ON UPDATE CASCADE ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE )
 >
 > D'aquesta manera si esborrem un departament de la taula DEPARTAMENT,
 > s'esborraran també els empleats de la taula EMPLEATS3 d'aquest departament.
@@ -280,14 +279,14 @@ heu d'esborrar-la primer.
 > Així, si férem la següent definició de la taula EMPLEAT3
 
         CREATE TABLE EMPLEAT3  
-          ( dni VARCHAR(10) ,  
-          nom VARCHAR ,  
-          data_naixement DATE ,  
-          sou NUMERIC(6,2) ,  
-          departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ON DELETE
-          SET NULL ,  
-          poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-          data_incorporacio DATE DEFAULT CURRENT_DATE )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ON DELETE
+            SET NULL ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE )
 >
 > en el cas que esborrem el departament 5, no donaria cap error per aquesta
 > restricció d'integritat, i posaria a nul el departament d'aquells empleats
@@ -300,13 +299,13 @@ Per exemple, anem a exigir que el sou siga estrictament positiu (per tipus de
 dades numèric, podria agafar el valor 0 o valors negatius)
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) CONSTRAINT sou_positiu CHECK (sou > 0),  
-      departament INT2 ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) CONSTRAINT sou_positiu CHECK (sou > 0),  
+            departament INT2 ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE )
 
 Evidentment es pot posar més d'una restricció en la definició d'una taula. En
 aquest exemple arrepleguem totes les anteriors, és a dir, definim la taula
@@ -317,13 +316,13 @@ DEPARTAMENT. Per complicar-lo un poc més també exigirem que el camp **nom**
 siga _no nul_ , i així veure que es pot posar més d'una restricció en un camp.
 
     CREATE TABLE EMPLEAT3  
-    ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY ,  
-    nom VARCHAR CONSTRAINT u_nom UNIQUE CONSTRAINT nn_nom NOT NULL ,  
-    data_naixement DATE ,  
-    sou NUMERIC(6,2) CONSTRAINT sou_positiu CHECK (sou > 0) ,  
-    departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ,  
-    poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-    data_incorporacio DATE DEFAULT CURRENT_DATE )
+            ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY ,  
+            nom VARCHAR CONSTRAINT u_nom UNIQUE CONSTRAINT nn_nom NOT NULL ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) CONSTRAINT sou_positiu CHECK (sou > 0) ,  
+            departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE )
 
 Observeu que com a qüestió d'estil s'han posat noms a les restriccions que
 d'alguna manera suggereixen el motiu de la restricció. Així, **cp_emp3** vol
@@ -361,25 +360,25 @@ sintaxi variarà lleugerament:
 > taula EMPLEAT3
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE ,  
-      CONSTRAINT cp_emp3 PRIMARY KEY (dni) )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+            CONSTRAINT cp_emp3 PRIMARY KEY (dni) )
 
 > I ara un altre per a definir la clau principal de FAMILIAR. Com la clau està
 > formada per 2 camps, estem obligats a utilitzar una restricció de camp
 > múltiple.
 
       CREATE TABLE FAMILIAR  
-      ( dni VARCHAR(10),  
-      nom VARCHAR,  
-      data_n DATE,  
-      parentesc VARCHAR(50),  
-      CONSTRAINT cp_fam2 PRIMARY KEY (dni,nom) )
+            ( dni VARCHAR(10),  
+            nom VARCHAR,  
+            data_n DATE,  
+            parentesc VARCHAR(50),  
+            CONSTRAINT cp_fam2 PRIMARY KEY (dni,nom) )
 
 > Com comentàvem, si la clau principal està formada per 2 camps estarem
 > obligats a utilitzar una restricció de camp múltiple. Un **error prou comú**
@@ -403,13 +402,13 @@ sintaxi variarà lleugerament:
 > restricció que els camps cognoms i nom (en conjunt) no es poden repetir.
 
       CREATE TABLE EMPLEAT4  
-      ( dni VARCHAR(10),  
-      cognoms VARCHAR,  
-      nom VARCHAR,  
-      data_naixement DATE,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 ,  
-      CONSTRAINT u_nom4 UNIQUE (cognoms,nom) )
+            ( dni VARCHAR(10),  
+            cognoms VARCHAR,  
+            nom VARCHAR,  
+            data_naixement DATE,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 ,  
+            CONSTRAINT u_nom4 UNIQUE (cognoms,nom) )
 
   * **NOT NULL**.
 
@@ -424,14 +423,14 @@ sintaxi variarà lleugerament:
 > així:
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE ,  
-      CONSTRAINT ce_emp3_dep FOREIGN KEY (departament) REFERENCES DEPARTAMENT )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+            CONSTRAINT ce_emp3_dep FOREIGN KEY (departament) REFERENCES DEPARTAMENT )
 
   * **CHECK** : ara la condició de validació podrà afectar a més d'un camp
 
@@ -439,14 +438,14 @@ Per exemple podríem exigir que la data d'incorporació siga estrictament
 posterior a la data de naixement
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE ,  
-      CONSTRAINT check_dates CHECK (data_incorporacio > data_naixement) )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+            CONSTRAINT check_dates CHECK (data_incorporacio > data_naixement) )
 
 O una altra una miqueta més real, anem a agafar empleats de més de 18 anys, i
 per tant anem a exigir que la data d'incorporació siga més de 18 anys
@@ -455,15 +454,15 @@ posterior a la data de naixement. Per a això utilitzem la funció
 ser la posterior), i d'ahí extraurem els anys amb **EXTRACT(year FROM ...)**
 
       CREATE TABLE EMPLEAT3  
-      ( dni VARCHAR(10) ,  
-      nom VARCHAR ,  
-      data_naixement DATE ,  
-      sou NUMERIC(6,2) ,  
-      departament INT2 ,  
-      poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-      data_incorporacio DATE DEFAULT CURRENT_DATE ,  
-      CONSTRAINT check_dates  
-      CHECK (EXTRACT(year FROM AGE(data_incorporacio,data_naixement) ) >=18 ) )
+            ( dni VARCHAR(10) ,  
+            nom VARCHAR ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) ,  
+            departament INT2 ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+            CONSTRAINT check_dates  
+            CHECK (EXTRACT(year FROM AGE(data_incorporacio,data_naixement) ) >=18 ) )
 
 Evidentment, es poden barrejar les restriccions de camp únic i les de camp
 múltiple. Ací en tenim un exemple on s'arrepleguen moltes (no totes) les
@@ -472,16 +471,16 @@ empleats, perquè no hi ha un altre remei, i també la de no repetició del camp
 **nom** , encara que podia ser de camp únic:
 
     CREATE TABLE EMPLEAT3  
-    ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY ,  
-    nom VARCHAR CONSTRAINT nn_nom NOT NULL ,  
-    data_naixement DATE ,  
-    sou NUMERIC(6,2) CONSTRAINT sou_positiu CHECK (sou > 0) ,  
-    departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ,  
-    poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
-    data_incorporacio DATE DEFAULT CURRENT_DATE ,  
-    CONSTRAINT u_nom3 UNIQUE (nom) ,  
-    CONSTRAINT check_dates  
-    CHECK (EXTRACT(year FROM AGE(data_incorporacio,data_naixement) ) >=18 ) )
+            ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY ,  
+            nom VARCHAR CONSTRAINT nn_nom NOT NULL ,  
+            data_naixement DATE ,  
+            sou NUMERIC(6,2) CONSTRAINT sou_positiu CHECK (sou > 0) ,  
+            departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ,  
+            poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+            data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+            CONSTRAINT u_nom3 UNIQUE (nom) ,  
+            CONSTRAINT check_dates  
+            CHECK (EXTRACT(year FROM AGE(data_incorporacio,data_naixement) ) >=18 ) )
 
 ### :pencil2: Exercicis
 
@@ -522,17 +521,17 @@ Per a alterar l'estructura d'algun camp o restricció utilitzarem aquesta
 sintaxi:
 
       ALTER TABLE taula  
-      {ADD | DROP | ALTER} {COLUMN camp | CONSTRAINT restricciómúltiple}
+            {ADD | DROP | ALTER} {COLUMN camp | CONSTRAINT restricciómúltiple}
 
 Per a canviar el nom d'un camp:
 
       ALTER TABLE taula  
-      RENAME [COLUMN] camp TO nou_nom_camp
+            RENAME [COLUMN] camp TO nou_nom_camp
 
 Per a canviar el nom de la taula:
 
     ALTER TABLE taula  
-    RENAME TO nou_nom_taula
+      RENAME TO nou_nom_taula
 
 **Afegir camp o restricció**{.azul}
 
@@ -541,12 +540,12 @@ Si volem afegir una columna o una restricció, l'haurem de definir totalment.
   * En el cas d'un camp, haurem d'especificar el nom, el tipus i opcionalment una restricció que afecte només al camp. Per exemple, aquesta sentència afegeix el camp supervisor (de tipus text de 10) a la taula EMPLEAT3. Observeu que en la definició del camp poden entrar restriccions de camp únic.
 
         ALTER TABLE EMPLEAT3  
-        ADD COLUMN supervisor VARCHAR(10)
+            ADD COLUMN supervisor VARCHAR(10)
 
   * En el cas d'una restricció, aquesta serà del tipus de restricció múltiple, amb la sintaxi que vam veure en l'apartat de restriccions. Per exemple, aquesta sentència afegeix la clau externa reflexiva (de EMPLEAT3 a EMPLEAT3) que indica els supervisors. El dni hauria de ser la clau principal de EMPLEAT3
 
         ALTER TABLE EMPLEAT3  
-        ADD CONSTRAINT ce_emp3_emp3 FOREIGN KEY (supervisor) REFERENCES EMPLEAT3 (dni)
+            ADD CONSTRAINT ce_emp3_emp3 FOREIGN KEY (supervisor) REFERENCES EMPLEAT3 (dni)
 
 **Modificar un camp**{.azul}
 
@@ -558,7 +557,7 @@ TYPE _nou_tipus_ **. Per exemple anem a fer que el camp poblacio siga de 25
 caràcters
 
       ALTER TABLE EMPLEAT3  
-      ALTER COLUMN poblacio TYPE VARCHAR(25)
+            ALTER COLUMN poblacio TYPE VARCHAR(25)
 
 Canviar el tipus de dades és automàtic quan els tipus són compatibles entre
 ells. Si no ho són ens donarà error, però segurament ho podrem esquivar amb la
@@ -566,12 +565,12 @@ clàusula**USING** , que ens permet posar a continuació el camp i aprofitem per
 a posar un **operador de conversió de tipus** (**::**) amb aquesta **sintaxi**:
 
       ALTER TABLE _TAULA_  
-      ALTER COLUMN _camp_ TYPE _tipus_nou_ USING _camp_ ::_tipus_nou_
+            ALTER COLUMN _camp_ TYPE _tipus_nou_ USING _camp_ ::_tipus_nou_
 
 Per a canviar el valor per defecte utilitzarem la **sintaxi**: **... ALTER COLUMN _camp_ {SET | DROP} DEFAULT [_expressió_] **
 
       ALTER TABLE EMPLEAT3  
-      ALTER COLUMN poblacio DROP DEFAULT
+            ALTER COLUMN poblacio DROP DEFAULT
 
 **Esborrar camp o restricció**{.azul}
 
@@ -581,24 +580,24 @@ restriccions). En el primer exemple llevem la clau externa del supervisor. En
 la segona llevem el camp supervisor.
 
       ALTER TABLE EMPLEAT3  
-      DROP CONSTRAINT ce_emp3_emp3;
+            DROP CONSTRAINT ce_emp3_emp3;
 
       ALTER TABLE EMPLEAT3  
-      DROP COLUMN supervisor
+            DROP COLUMN supervisor
 
 **Renomenar un camp**{.azul}
 
 Per exemple renomenem el camp **data_incorporacio** a **data_inc** :
 
       ALTER TABLE EMPLEAT3  
-      RENAME COLUMN data_incorporacio TO data_inc
+            RENAME COLUMN data_incorporacio TO data_inc
 
 **Renomenar la taula**{.azul}
 
 Ara li posarem el nom EMP3 a la taula EMPLEAT3
 
       ALTER TABLE EMPLEAT3  
-      RENAME TO EMP3
+            RENAME TO EMP3
 
 **<u>Exemples</u>**
 
@@ -706,7 +705,7 @@ En PostgreSQL la creació d'índex és molt completa. Anem a veure una versió
 resumida:
 
         CREATE [UNIQUE] INDEX nom_índex  
-        ON taula (c1 [ASC|DESC][, c2 [ASC|DESC], ...] [NULLS { FIRST | LAST }] )
+             ON taula (c1 [ASC|DESC][, c2 [ASC|DESC], ...] [NULLS { FIRST | LAST }] )
 
 Si posem l'opció UNIQUE impedirà que es repetesquen els valors del camp (o
 camps) que formen l'índex, de forma similar a la restricció UNIQUE del
@@ -770,10 +769,10 @@ Per exemple, una vista amb les comarques, el número de poblacions de cada
 comarca, el total d'habitats i l'altura mitjana:
 
       CREATE OR REPLACE VIEW ESTADISTICA AS  
-      SELECT nom_c, count(nom) AS num_p,sum(poblacio) AS pobl, avg(altura) AS alt_mitjana  
-        FROM POBLACIONS  
-        GROUP BY nom_c  
-        ORDER BY nom_c;
+            SELECT nom_c, count(nom) AS num_p,sum(poblacio) AS pobl, avg(altura) AS alt_mitjana  
+                  FROM POBLACIONS  
+                  GROUP BY nom_c  
+                  ORDER BY nom_c;
 
 !!!note "Nota"
     Si voleu provar aquesta vista, ho podeu fer en la Base de Dades **geo** , ja
