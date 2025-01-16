@@ -19,8 +19,8 @@ markdown_extensions:
 
 nav:
   - POSTGRESQL - DDL :
-    - 1. Introducció: 31_introducci.md
-    - 2. DDL: 32_ddl.md
+    - 1. Introducció: 1_introducci.md
+    - 2. DDL: 2_ddl.md
     - Exercicis del tot el tema: exercicis_de_tot_el_tema.md
   #- Consultes d'actualització:
   #  - 3. Consultes d'actualització: 33_consultes_dactualitzaci.md

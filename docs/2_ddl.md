@@ -129,7 +129,7 @@ connectant com un usuari amb el mateix nom i contrasenya:
     **f_grup_9999x** (per anar creant i modificant), on grup és el vostre grup,
     9999 són les 4 últimes xifres del vostre DNI, i x la lletra del NIF.
 
-## 2.3 Restriccions (Constraint)
+### 2.2.1 Restriccions (Constraint)
 
 
 
@@ -142,7 +142,7 @@ que es posen en la mateixa definició del camp) i les que afecten o poden
 afectar a més d'un camp, que s'han de definir separadament de la definició
 dels camps. Comencem per les primeres, per ser més senzilles d'entendre:
 
-### 2.3.1 Restriccions de camp únic
+#### 2.2.1.1 Restriccions de camp únic
 
 Són restriccions que es posen en la mateixa definició del camp i només
 afectaran a aquest camp: van per tant després del tipus de dades del camp i
@@ -344,7 +344,7 @@ EMPLEAT3 a la taula DEPARTAMENT_. Si tenim un criteri clar per als noms de les
 restriccions, si després les volem desactivar temporalment o senzillament
 esborrar-les, ho podrem fer des de SQL.
 
-### 2.3.2 Restriccions de camp múltiple
+#### 2.2.1.2 Restriccions de camp múltiple
 
 També s'anomenen restriccions de taula, en contraposició a les anteriors, que
 són restriccions de camp. Són restriccions que van dins de la definició d'una
@@ -394,17 +394,17 @@ sintaxi variarà lleugerament:
             CONSTRAINT cp_fam2 PRIMARY KEY (dni,nom) )
 
 > Com comentàvem, si la clau principal està formada per 2 camps estarem
-> obligats a utilitzar una restricció de camp múltiple. Un **error prou comú**
+> obligats a utilitzar una restricció de camp múltiple. Un **error**{.rojo} prou comú
 > seria el següent:
 
-!!!Warning ""
-    **CREATE TABLE FAMILIAR2**{.rojo}   
-      **( dni VARCHAR(10) PRIMARY KEY,**{.rojo}  
-      **nom VARCHAR PRIMARY KEY,**{.rojo}  
-      **data_n DATE,**{.rojo}  
-      **parentesc VARCHAR(50) )**{.rojo}
 
-> Podeu comprovar que donarà **error** , perquè estem intentant definir 2
+      CREATE TABLE FAMILIAR2
+            ( dni VARCHAR(10) PRIMARY KEY,
+            nom VARCHAR PRIMARY KEY,
+            data_n DATE,
+            parentesc VARCHAR(50) )
+
+> Podeu comprovar que donarà **error**{.rojo} , perquè estem intentant definir 2
 > claus principals. La clau principal és única, això sí formada per 2 camps en
 > aquesta ocasió.
 
