@@ -531,7 +531,7 @@ del vostre DNI, i x la lletra del NIF)
 > ARTICLE. A més **cod_a** ha de ser no nul.
 
 
-## 2.4 ALTER TABLE
+## 2.3 ALTER TABLE
 
 Permet modificar l'estructura d'una taula ja existent, bé afegint, llevant o
 modificant camps (columnes), bé afegint o llevant restriccions. També servirà
@@ -673,7 +673,7 @@ externa que apunta a ARTICLE (aquesta normal, és a dir NO ACTION)
       Per a no fer-lo massa llarg s'han deixat de definir alguna restricció,
       concretament la reflexiva de VENEDOR a VENEDOR (que marca el cap)
 
-## 2.5 DROP TABLE
+## 2.4 DROP TABLE
 
 Ens servirà per esborrar absolutament una taula, tant les dades com
 l'estructura. S'ha d'anar amb compte amb ella, perquè és una operació que no
@@ -687,7 +687,7 @@ es pot desfer, i per tant potencialment molt perillosa.
 
       DROP TABLE FAMILIAR
 
-## 2.6 Índex
+## 2.5 Índex
 
 Els índex són estructures de dades que permeten mantenir ordenada una taula
 respecte a un o més d'un camp, cadascun d'ells de forma ascendent o
@@ -773,7 +773,7 @@ del vostre DNI, i x la lletra del NIF)
 **Ex_15** - Afegir un índex anomenat**i_adr_ven** a la taula **VENEDOR** per a
 que estiga ordenat per **cp** (ascendent) i **adreca**(descendent).
 
-## 2.7 Vistes
+## 2.6 Vistes
 
 Les vistes, també anomenades esquemes externs, consisteixen en visions
 particulars de la B.D. Es correspon al nivell extern de l'arquitectura a tres
@@ -853,7 +853,7 @@ resultats
 
 **Ex 18** - Crear la vista RESUM_CATEGORIAS, on aparega informació del nom de la categoria, del nombre total d'articles venuts i de l'import total facturat.
 
-## 2.8. Creació d'altres objectes: seqüències, dominis i tipus.
+## 2.7. Creació d'altres objectes: seqüències, dominis i tipus.
 
 Una de les característiques de PostgreSQL és la seua gran versatilitat.
 
@@ -872,7 +872,7 @@ les més modernes sí que es pot, però en versions anteriors (com la 8.4 que é
 la que tenim ara en el servidor) no podrem, excepte en les vistes i les
 funcions.
 
-### 2.8.1 Seqüències
+### 2.7.1 Seqüències
 
 **Creació d'una seqüència**{.azul}
 
@@ -973,7 +973,7 @@ seqüència per a no interferir amb els companys/es.
 
       DROP SEQUENCE s_num_fac;
 
-### 2.8.2 Dominis
+### 2.7.2 Dominis
 
 Els dominis són els conjunts de valors que pot agafar un determinat camp.
 Habitualment es posa senzillament un tipus de dades. Però el model relacional
@@ -1089,7 +1089,7 @@ esborrem tot el que hem creat:
 Encara no esborrem els dominis **hemi_lat** , **graus_lat** i **min_seg** ,
 perquè els utilitzarem en la següent pregunta.
 
-### 2.8.3 Tipus de dades
+### 2.7.3 Tipus de dades
 
 Ja havíem comentat que PosgreSQL és molt versàtil, i permet a l'usuari crear
 tipus de dades personals.
