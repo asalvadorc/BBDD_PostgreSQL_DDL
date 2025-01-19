@@ -222,6 +222,7 @@ heu d'esborrar-la primer.
             poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
             data_incorporacio DATE DEFAULT CURRENT_DATE )
 
+
 **Restricció d'integritat referencial**{.azul}
 
   * **REFERENCES** : servirà per a definir que aquest camp és una clau externa. Haurem d'especificar obligatòriament la taula a la qual apunta, i opcionalment podem posar entre parèntesis el camp de la taula al qual apunta, encara que si no ho posem, per defecte apuntarà a la clau principal (i nosaltres sempre voldrem apuntar a la clau principal).
@@ -543,7 +544,7 @@ Per a alterar l'estructura d'algun camp o restricció utilitzarem aquesta
 sintaxi:
 
       ALTER TABLE taula  
-            {ADD | DROP | ALTER} {COLUMN camp | CONSTRAINT restricciómúltiple}
+            {ADD | DROP | ALTER} {COLUMN camp | CONSTRAINT restricció múltiple}
 
 Per a canviar el nom d'un camp:
 

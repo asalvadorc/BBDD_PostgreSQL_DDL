@@ -5,15 +5,15 @@ potent per a poder consultar el contingut de les taules d'una Base de Dades.
 Però el llenguatge SQL és més complet, i permet també crear l'estructura de
 les taules i altres objectes. I també ens permetrà manipular la informació,
 introduint dades noves, eliminant-ne o modificant les ja existents.
-
+<!--
 Subdividirem, aquesta part del tema en dos grans blocs:
 
   * **DDL** (_Data Definition Language_) llenguatge de definició de dades. És el que ens permetrà definir les estructures de dades: taules, vistes, i com veurem en altres temes, més objectes.
 
   * **Consultes d'actualització**. No canvien cap estructura de cap taula, sinó que modifiquen el contingut de les taules. I només hi ha 3 possibilitats en la modificació del contingut: inserir noves files (INSERT), modificar les ja existents en algun camp determinat (UPDATE) o esborrar files (DELETE)
-
-Durant tota aquesta tercera part de SQL farem consultes per a crear o
-modificar taules, o per a modificar les dades de les taules.
+-->
+Durant tota aquesta part de SQL farem consultes per a crear o
+modificar taules.
 
 No ens convé en absolut treballar sobre la Base de Dades **geo** ni sobre
 **factura** , ja que el que faríem seria "boicotejar-nos" entre nosaltres.
