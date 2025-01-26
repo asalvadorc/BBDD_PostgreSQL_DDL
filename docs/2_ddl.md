@@ -180,10 +180,8 @@ Els tipus de restriccions que podem definir són:
 
 !!!Note "Nota"
     Podeu comprovar que si no poseu nom a la restrició, és a dir si poseu
-    directament dni **TEXT(10) PRIMARY KEY** , i aneu al disseny de la taula
-    (fent-li clic des de pgAdmin; recordeu que heu de refrescar per a que
-    apareguen els nous obectes), PostgreSQL posa automàticament un nom a la
-    restricció format pel nom de la taula seguit de **_pkey**.
+    directament dni **TEXT(10) PRIMARY KEY**, i aneu al disseny de la taula,
+    PostgreSQL posa automàticament un nom a la restricció format pel nom de la taula seguit de **_pkey**.
 
 
 >> Tingueu en compte també que si la taula ja existia donarà un error. Només
@@ -433,7 +431,8 @@ sintaxi variarà lleugerament:
 
 > No existeix aquesta opció com a restricció múltiple. Per tant s'ha de
 > definir sempre com a restricció de camp únic.
->
+
+
 **Restricció d'integritat referencial**{.azul}
 
   * **FOREIGN KEY** : servirà per a definir que aquest o aquestos camps són una clau externa. És la que més varia en la seua sintaxi, ja que hem d'especificar tant el o els camps d'aquesta taula que són clau externa, com la taula a la qual apunta (i en tot cas el o els camps on s'apunta, encara que si no ho posem apuntarà a la clau principal de l'altra taula, cosa que voldrem sempre):
