@@ -884,7 +884,7 @@ valors numèrics que van incrementant-se (com l'autonumèric).
 
       CREATE SEQUENCE _nom_seqüència_  
         [START WITH _valor_inicial_]  
-        [INCREMENTED BY _valor_increment_] ... ;
+        [INCREMENT BY _valor_increment_] ... ;
 
 La sentència és més llarga, per a considerar més casos. Per a nosaltres està
 bé així.
