@@ -735,7 +735,7 @@ Si posem l'opció UNIQUE impedirà que es repetisquen els valors del camp (o
 camps) que formen l'índex, de forma similar a la restricció UNIQUE del
 CONSTRAINT.
 
-L'opció d'ordenació per defecte és l'ascendent.
+**L'opció d'ordenació per defecte és l'ascendent.**
 
 Podem fer que els nuls estiguen al principi de tot o al final de tot, segons
 ens convinga:
