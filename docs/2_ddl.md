@@ -740,7 +740,8 @@ L'opció d'ordenació per defecte és l'ascendent.
 Podem fer que els nuls estiguen al principi de tot o al final de tot, segons
 ens convinga:
 
-  * **FIRST** : farà que en l'ordenació els valors nuls vagen abans de qualsevol altre valor. Aquesta és l'opció per defecte si l'ordre és descendent a més de crear l'índex fa que siga clau principal. Evidentment no ha d'haver una clau principal creada amb anterioritat.
+  * **FIRST** : farà que en l'ordenació, els valors nuls vagen abans de qualsevol altre valor. Aquesta és l'opció per defecte, si l'ordre és descendent, a més de crear l'índex fa que siga clau principal. 
+  Evidentment no ha d'haver una clau principal creada amb anterioritat.
 
   * **LAST** : els valors nuls estaran al final de tot, després de qualsevol altre valor. És l'opció per defecte quan l'ordre és ascendent.
 
