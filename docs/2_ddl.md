@@ -511,7 +511,7 @@ empleats, perquè no hi ha un altre remei, i també la de no repetició del camp
 En **f_grup_9999x** (on grup és el vostre grup, 9999 són les 4 últimes xifres
 del vostre DNI, i x la lletra del NIF)
 
-> **Ex_3** - Crear la taula **PROVINCIA** , amb la clau principal****.
+> **Ex_3** - Crear la taula **PROVINCIA** , amb la clau principal.
 >
 > **Ex_4** - Crear la taula **POBLE** , amb la clau principal i la restricció
 > que el camp **cod_pro** és clau externa que apunta a PROVINCIA.
@@ -731,7 +731,7 @@ resumida:
         CREATE [UNIQUE] INDEX nom_índex  
              ON taula (c1 [ASC|DESC][, c2 [ASC|DESC], ...] [NULLS { FIRST | LAST }] )
 
-Si posem l'opció UNIQUE impedirà que es repetesquen els valors del camp (o
+Si posem l'opció UNIQUE impedirà que es repetisquen els valors del camp (o
 camps) que formen l'índex, de forma similar a la restricció UNIQUE del
 CONSTRAINT.
 
@@ -740,7 +740,7 @@ L'opció d'ordenació per defecte és l'ascendent.
 Podem fer que els nuls estiguen al principi de tot o al final de tot, segons
 ens convinga:
 
-  * **FIRST** : farà que en l'ordenació els valors nuls vagen abans de qualsevol altre valor. Aquesta és l'opció per defecte si l'ordre és descendenta més de crear l'índex fa que siga clau principal. Evidentment no ha d'haver una clau principal creada amb anterioritat.
+  * **FIRST** : farà que en l'ordenació els valors nuls vagen abans de qualsevol altre valor. Aquesta és l'opció per defecte si l'ordre és descendent a més de crear l'índex fa que siga clau principal. Evidentment no ha d'haver una clau principal creada amb anterioritat.
 
   * **LAST** : els valors nuls estaran al final de tot, després de qualsevol altre valor. És l'opció per defecte quan l'ordre és ascendent.
 
