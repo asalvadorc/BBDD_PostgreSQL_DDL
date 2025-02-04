@@ -771,8 +771,8 @@ del vostre DNI, i x la lletra del NIF)
 **Ex_14** - Afegir un índex anomenat **i_nom_cli** a la taula **CLIENT** pel camp
 **nom**.
 
-**Ex_15** - Afegir un índex anomenat**i_adr_ven** a la taula **VENEDOR** per a
-que estiga ordenat per **cp** (ascendent) i **adreca**(descendent).
+**Ex_15** - Afegir un índex anomenat **i_adr_ven** a la taula **VENEDOR** per a
+que estiga ordenat per **cp** (ascendent) i **adreca** (descendent).
 
 ## 2.6 Vistes
 
@@ -846,20 +846,20 @@ del vostre DNI, i x la lletra del NIF)
 
 **Ex_16** - Crear la vista **RESUM_FACTURA** , que ens dóne el total dels diners
 de la factura, el total després del descompte d'articles, i el total després
-del descompte de la factura, tal i com teníem en la consulta **6.56**. A
+del descompte de la factura, tal i com teníem en la consulta **Ex_56**. A
 partir d'aquest moment podrem utilitzar la vista per a traure aquestos
 resultats
 
-**Ex 17** - Crear la vista RESUM_VENEDOR, on aparega informació del nom del venedor, del nombre total d'articles venuts i de l'import total facturat.
+**Ex 17** - Crear la vista **RESUM_VENEDOR**, on aparega informació del nom del venedor, del nombre total d'articles venuts i de l'import total facturat.
 
-**Ex 18** - Crear la vista RESUM_CATEGORIAS, on aparega informació del nom de la categoria, del nombre total d'articles venuts i de l'import total facturat.
+**Ex 18** - Crear la vista **RESUM_CATEGORIAS**, on aparega informació del nom de la categoria, del nombre total d'articles venuts i de l'import total facturat.
 
 ## 2.7. Creació d'altres objectes: seqüències, dominis i tipus.
 
 Una de les característiques de PostgreSQL és la seua gran versatilitat.
 
 En concret es poden crear molts objectes. A banda dels habituals, vistes,
-seqüències, ... es poden xcrear més tipus d'objectes. En aquest curs donarem
+seqüències,... es poden xcrear més tipus d'objectes. En aquest curs donarem
 una ulladeta als dominis i la definició de nous tipus de dades.
 
 Hem de tenir en consideració que tots ens connectarem com el mateix usuari per
@@ -867,17 +867,16 @@ a fer proves. Per tant els objectes que creem poden fastidiar a altres
 companys si utilitzem tots els mateixos noms.
 
 En altres SGBD (com per exemple Oracle) existeix la possibilitat de crear els
-objectes posant **CREATE OR REPLACE ...** , que si no existeix el crea, i si
+objectes posant **CREATE OR REPLACE ...**, que si no existeix el crea, i si
 existeix el substitueix. Lamentablement en PostgreSQL depén de la versió: en
-les més modernes sí que es pot, però en versions anteriors (com la 8.4 que és
-la que tenim ara en el servidor) no podrem, excepte en les vistes i les
+les més modernes sí que es pot, però en versions anteriors no podrem, excepte en les vistes i les
 funcions.
 
 ### 2.7.1 Seqüències
 
 **Creació d'una seqüència**{.azul}
 
-També es poden crear seqüències (**SEQUENCE**) , que són objectes que agafen
+També es poden crear seqüències (**SEQUENCE**), que són objectes que agafen
 valors numèrics que van incrementant-se (com l'autonumèric).
 
 **<u>Sintaxi</u>**
@@ -894,10 +893,10 @@ Per defecte, el valor inicial és 1, i l'increment també 1.
 
 És un objecte independent de les taules. S'utilitza de la següent manera:
 
-> **CURRVAL ('****_nom_seqüència_ ') **torna el valor actual (ha d'estar
+> **CURRVAL('_nom_seqüència_')** torna el valor actual (ha d'estar
 > inicialitzat)
 
-> **NEXTVAL('****_nom_seqüència_ ') **incrementa la seqüència i torna el nou
+> **NEXTVAL('_nom_seqüència_')** incrementa la seqüència i torna el nou
 > valor (excepte la primera vegada que l'inicia amb el valor inicial)
 
 La manera habitual d'utilitzar-lo serà per obtenir un valor que s'afegirà a un
@@ -938,7 +937,9 @@ la columna **num_f** , que agafa el valor de la seqüència
 
 Observeu també que en la taula FACTURA2, el valor comença per **2016002** , ja
 que el primer valor l'havíem utilitzat en FACTURA. Per tant el contingut de la
-taula **FACTURA2** serà:![](T6_III_2_8_1_2.png)
+taula **FACTURA2** serà:
+
+>>![](T6_III_2_8_1_2.png)
 
 També ho podríem haver fet declarant la clau de tipus **SERIAL** , que el que
 fa és implementar una seqüència, i donar valors successius per al camp on està
