@@ -105,17 +105,13 @@ executar la sentència.
 Al llarg d'aquesta tercera part, en el conjunt d'exercicis de DDL, crearem
 tota l'estructura de la Base de Dades **FACTURA** , però per a no interferir
 cadascú amb els altres companys, cadascú es connectarà a la seua Base de Dades
-**f_grup_9999x** (on grup és el vostre grup p.ex. 1cfsg, 1cfsh... , 9999 són
-les 4 últimes xifres del vostre DNI, i x la lletra del NIF).
-
+**factura_local**.  
 L'esquema Entitat-Relació i l'esquema relacional que implementarem serà el
 següent:
 
 ![](factura.png)
 
-En la Base de Dades anomenada **f_grup_9999x** (on grup és el vostre grup,
-9999 són les 4 últimes xifres del vostre DNI, i x la lletra del NIF),
-connectant com un usuari amb el mateix nom i contrasenya:
+En la Base de Dades anomenada **factura_local**:
 
 > **Ex_1** - Creeu la taula **CATEGORIA** , amb els mateixos camps i del mateix
 > tipus que en la taula CATEGORIA de **FACTURA** , però de moment sense clau
@@ -126,8 +122,7 @@ connectant com un usuari amb el mateix nom i contrasenya:
 !!!note "Nota"
     Durant tots aquestos exercicis de DDL pot ser molt convenient tenir obertes
     les dues connexions: la de **FACTURA** (per anar consultant) i la de
-    **f_grup_9999x** (per anar creant i modificant), on grup és el vostre grup,
-    9999 són les 4 últimes xifres del vostre DNI, i x la lletra del NIF.
+    **factura_local** (per anar creant i modificant).
 
 ### 2.2.1 Restriccions (Constraint)
 
@@ -508,8 +503,7 @@ empleats, perquè no hi ha un altre remei, i també la de no repetició del camp
 
 ![](factura_rel.png)
 
-En **f_grup_9999x** (on grup és el vostre grup, 9999 són les 4 últimes xifres
-del vostre DNI, i x la lletra del NIF)
+En **factura_local**:
 
 > **Ex_3** - Crear la taula **PROVINCIA** , amb la clau principal.
 >
@@ -651,8 +645,7 @@ Ara li posarem el nom EMP3 a la taula EMPLEAT3
 
 ![](factura_rel.png)
 
-En **f_grup_9999x** (on grup és el vostre grup, 9999 són les 4 últimes xifres
-del vostre DNI, i x la lletra del NIF)
+En **factura_local**:
 
 **Ex_9** - Afegir un camp a la taula **VENEDOR** anomenat **alies** de tipus
 text, que ha de ser no nul i únic.
@@ -765,8 +758,7 @@ nom de l'índex i la taula on està definit.
 
 ### :pencil2: Exercicis
 
-En **f_grup_9999x** (on grup és el vostre grup, 9999 són les 4 últimes xifres
-del vostre DNI, i x la lletra del NIF)
+En **factura_local**:
 
 **Ex_14** - Afegir un índex anomenat **i_nom_cli** a la taula **CLIENT** pel camp
 **nom**.
@@ -841,8 +833,7 @@ Per exemple, per a esborrar la vista anterior:a esborrar una vista
 
 ### :pencil2: Exercicis
 
-En **f_grup_9999x** (on grup és el vostre grup, 9999 són les 4 últimes xifres
-del vostre DNI, i x la lletra del NIF)
+En **factura_local**:
 
 **Ex_16** - Crear la vista **RESUM_FACTURA** , que ens dóne el total dels diners
 de la factura, el total després del descompte d'articles, i el total després
@@ -1246,6 +1237,8 @@ els companys:
       DROP DOMAIN hemi_lat , graus_lat , min_seg ;
 
 ### :pencil2: Exercicis
+
+En **factura_local**:
 
 **Ex 19** - Tenim creada la taula VENEDOR i es desitja que la clau principal siga una seqüència autonumérica personalitzada. 
 Observa la informació actual en la taula VENEDOR de la BD factura i analitza quina seqüència s'ha utilitzat.

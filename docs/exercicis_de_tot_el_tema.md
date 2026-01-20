@@ -3,8 +3,7 @@
 Al llarg d'aquesta tercera part, en el conjunt d'exercicis de DDL, crearem
 tota l'estructura de la Base de Dades **FACTURA** , però per a no interferir
 cadascú amb els altres companys, cadascú es connectarà a la seua Base de Dades
-**f_grup_9999x** (on grup és el vostre grup p.ex. 1cfsg, 1cfsh... , 9999 són
-les 4 últimes xifres del vostre DNI, i x la lletra del NIF), connectant com un usuari amb el mateix nom i contrasenya
+**factura_local**.
 
 L'esquema Entitat-Relació i l'esquema relacional que implementarem serà el
 següent:
@@ -15,9 +14,8 @@ següent:
 !!!note "Nota"
       Durant tots aquestos exercicis de DDL pot ser molt convenient tenir obertes
       les dues connexions: la de **FACTURA** (per anar consultant) i la de
-      **f_grup_9999x** (per anar creant i modificant), on grup és el vostre grup,
-      9999 són les 4 últimes xifres del vostre DNI, i x la lletra del NIF.
-
+      **factura_local** (per anar creant i modificant).
+      
 **Ex_1** - Creeu la taula **CATEGORIA** , amb els mateixos camps i del mateix
 tipus que en la taula CATEGORIA de **FACTURA** , però de moment sense clau
 principal ni cap altra restricció. 
