@@ -43,7 +43,7 @@ Anem a fer la instal·lació:
 
 ## 1.2 PostgreSQL amb Docker Compose
 
-1) En una carpeta, por ejemplo, **docker/postgres_local**{.verde}, **crea el archivo** vacío **docker-compose.yml**{.verde}.
+1) En una carpeta, per exemple, **docker/postgres_local**{.verde}, **crea l’arxiu** buit **docker-compose.yml**{.verde}.
   El fitxer **docker-compose.yml**{.verde} defineix el contenidor de PostgreSQL, la seva configuració i els ports per a connectar-se des de DBeaver. 
 
 Copia el contingut següent dins del fitxer **docker-compose.yml**{.verde}
