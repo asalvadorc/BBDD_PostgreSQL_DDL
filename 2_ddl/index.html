@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://github.com/asalvadorc/BBDD_POSTGRES_DDL/2_ddl/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>2. DDL - BD - Bases de Dades</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+        <link href="../img/favicon.ico" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "2. DDL";
+        var mkdocs_page_input_path = "2_ddl.md";
+        var mkdocs_page_url = "/asalvadorc/BBDD_POSTGRES_DDL/2_ddl/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/logocaminas.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">POSTGRESQL - DDL</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../1_introducci/">1. Introducció</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">2. DDL</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#21-tipus-de-dades">2.1 Tipus de dades</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#22-create-table">2.2 CREATE TABLE</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exercicis">Exercicis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#221-restriccions-constraint">2.2.1 Restriccions (Constraint)</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#2211-restriccions-de-camp-unic">2.2.1.1 Restriccions de camp únic</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2212-restriccions-de-camp-multiple">2.2.1.2 Restriccions de camp múltiple</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercicis_1">Exercicis</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#23-alter-table">2.3 ALTER TABLE</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exercicis_2">Exercicis</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#24-drop-table">2.4 DROP TABLE</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#25-index">2.5 Índex</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exercicis_3">Exercicis</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#26-vistes">2.6 Vistes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exercicis_4">Exercicis</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#27-creacio-daltres-objectes-sequencies-dominis-i-tipus">2.7. Creació d'altres objectes: seqüències, dominis i tipus.</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#271-sequencies">2.7.1 Seqüències</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#272-dominis">2.7.2 Dominis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#273-tipus-de-dades">2.7.3 Tipus de dades</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercicis_5">Exercicis</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../exercicis_de_tot_el_tema/">Exercicis del tot el tema</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BD - Bases de Dades</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">POSTGRESQL - DDL</li>
+      <li class="breadcrumb-item active">2. DDL</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="2-ddl">2. DDL</h1>
+<p><strong>DDL</strong>(<em>Data Definition Language</em>) o <strong>Llenguatge de Definició de Dades</strong> és
+el conjunt de sentències que ens permeten definir, retocar o esborrar
+l'estructura de la Base de Dades. I com que l'estructura bàsica d'una Base de
+Dades Relacional és la taula, ens dedicarem bàsicament a estudiar les
+sentències que ens permeten definir les taules (o modificar-les o esborrar-
+les), amb totes les restriccions que hem vist en el Model Relacional: clau
+principal, claus externes, camps no nuls, ... També veurem altres objectes que
+podrem definir, sobretot <strong>vistes</strong> , que es corresponen a l'esquema extern
+que vam veure en el Tema 1, és a dir, la visió particular que pot tenir un
+usuari.</p>
+<p>Seran 3 sentències les que veurem:</p>
+<ul>
+<li>
+<p><strong>CREATE</strong> , que permet crear un objecte nou.</p>
+</li>
+<li>
+<p><strong>DROP</strong> , que permet esborrar un objecte ja existent.</p>
+</li>
+<li>
+<p><strong>ALTER</strong> , que permet modificar un objecte ja existent.</p>
+</li>
+</ul>
+<p>En el moment de crear una taula definirem tots els seus camps, amb les
+restriccions pertinents a cadascun d'ells. Cada camp haurà de ser d'un tipus
+de dades. En cada SGBD hi ha uns tipus de dades particulars, encara que els
+més bàsics són similars, i en ells serà on incidirem més.</p>
+<h2 id="21-tipus-de-dades">2.1 Tipus de dades</h2>
+<p>En el moment de definir un camp haurem d'especificar obligatòriament de quin
+tipus serà. Ja es van veure els tipus bàsics d'Access en el tutorial del tema
+5. Ara els veurem els tipus bàsics de <strong>PostgreSQL</strong> , i veurem que hi haurà
+molts tipus similars (com en tots els SGBD).</p>
+<p>En el següent quadre es resumeixen els tipus de dades més importants de
+PostgreSQL. És un conjunt molt extens, que fins i tot pot ampliar l'usuari amb
+la instrucció <strong>CREATE TYPE</strong> , com veurem al final del tema. Són especialment
+interessants els tipus geomètrics (amb <strong><em>POINT</em></strong> , <strong><em>BOX</em></strong> ,...) i el INET
+(adreça IP).</p>
+<p><img alt="" src="../resum_ddl.png" /></p>
+<p>També disposarem d'un tipus enumerat. El veurem en l'última pregunta del tema.</p>
+<p>En la documentació de PostgreSQL trobarem tots els tipus possibles:   </p>
+<blockquote>
+<p><a href="http://www.postgresql.org/docs/9.5/static/datatype.html">http://www.postgresql.org/docs/9.5/static/datatype.html</a></p>
+</blockquote>
+<h2 id="22-create-table">2.2 CREATE TABLE</h2>
+<p>Permet crear una nova taula. Obligatòriament s'hauran d'especificar els camps
+i els tipus de dades de cada camp. Òbviament, una vegada creada la taula
+estarà buida, sense cap fila.</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>CREATE TABLE taula  
+  ( camp1 tipus [(grandària)] [DEFAULT valor] [restricció11] [restricció12] [...]  
+  [, camp2 tipus [(grandària)] [DEFAULT valor] [restricció21] [restricció22][...]  
+  [, ...]]  
+  [, restricciómultiple1 [, ...]] )
+</code></pre>
+<p>Podem observar que la definició de l'estructura de la taula va entre
+parèntesis, separant per comes la definició de cada camp.</p>
+<ul>
+<li>
+<p>El nom de la taula no ha de ser el de cap altre objecte anterior (taula o vista). Si volem posar un nom amb més d'una paraula o amb una paraula reservada, l'haurem de posar entre cometes dobles; però no us ho aconselle, és preferible la utilització del guió baix, i així només és una paraula.</p>
+</li>
+<li>
+<p>En cada camp posarem el seu nom i el tipus. Si el tipus de dades és VARCHAR, podrem posar opcionalment la grandària màxima (si no la posem serà de 255 en el cas de text). Si el tipus de dades és NUMERIC, podrem posar opcionalment la grandària (número de xifres significatives) i número de xifres de la part fraccionària.</p>
+</li>
+<li>
+<p>Podem posar ocionalment un valor per defecte amb la clàusula <strong>DEFAULT</strong>. D'aquesta manera, en introduir una nova fila en la taula, si no li posem valor a aquest camp, agafarà el valor per defecte. En el valor es pot posar una constant del tipus del camp, o una expressió amb funcions, sempre que torne una dada dels tipus del camp.</p>
+</li>
+<li>
+<p>Podem posar opcionalment restriccions a cada camp. Hauran d'anar abans de la coma que separa del següent camp. També poden haver restriccions que afecten a més d'un camp, que preferiblement posarem al final de la definició de la taula. Veurem les restriccions en el següent punt.</p>
+</li>
+</ul>
+<p><strong><u>Exemples</u></strong></p>
+<p>Si voleu practicar aquestos exemples, feu-lo sobre la Base de Dades <strong>proves</strong>
+(usuari <strong>proves</strong> , contrasenya <strong>proves</strong>). Si us dóna error perquè la taula
+que aneu a crear ja està creada la taula, esborreu-la primer, i torneu a
+executar la sentència.</p>
+<p>1) Crear una nova taula anomenada <strong>EMPLEAT1</strong> amb dos camps, un anomenat <strong>dni</strong> de tipus text i llargària 10 i un altre anomenat <strong>nom</strong><em>*</em>* amb llargària 50.</p>
+<pre><code>  CREATE TABLE EMPLEAT1 (dni VARCHAR (10) , nom VARCHAR (50));
+</code></pre>
+<p>2) Crear una taula anomenada <strong>EMPLEAT2</strong> amb un camp text de 10 caràcters anomenat <strong>dni</strong> ; un altre camp de tipus text de llargària predeterminada (255) anomenat <strong>nom;</strong> un altre camp anomenat <strong>data_naixement</strong> de tipus data; un altre anomenat <strong>sou</strong> de tipus numèric, amb 6 xifres significatives, de les quals 2 ha de ser de la part fraccionària i un últim anomenat <strong>departament</strong> de tipus numèric menudet (INT2 o SMALLINT).</p>
+<pre><code>  CREATE TABLE EMPLEAT2  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 )
+</code></pre>
+<p>3) Crear una taula anomenada <strong>EMPLEAT3</strong> com el de l'exemple anterior, però amb dos camps més al final: un camp anomenat <strong>poblacio</strong> de tipus text de 50 caràcters, i amb el valor per defecte <strong>Castelló</strong> i un últim anomenat <strong>data_incorporacio</strong> de tipus data i valor per defecte la data d'avui</p>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE )
+</code></pre>
+<h3 id="exercicis"><img alt="✏️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/270f.png" title=":pencil2:" />Exercicis</h3>
+<p>Al llarg d'aquesta tercera part, en el conjunt d'exercicis de DDL, crearem
+tota l'estructura de la Base de Dades <strong>FACTURA</strong> , però per a no interferir
+cadascú amb els altres companys, cadascú es connectarà a la seua Base de Dades
+<strong>factura_local</strong>.<br />
+L'esquema Entitat-Relació i l'esquema relacional que implementarem serà el
+següent:</p>
+<p><img alt="" src="../factura.png" /></p>
+<p>En la Base de Dades anomenada <strong>factura_local</strong>:</p>
+<blockquote>
+<p><strong>Ex_1</strong> - Creeu la taula <strong>CATEGORIA</strong> , amb els mateixos camps i del mateix
+tipus que en la taula CATEGORIA de <strong>FACTURA</strong> , però de moment sense clau
+principal ni cap altra restricció.</p>
+<p><strong>Ex_2</strong> - Creeu la taula <strong>ARTICLE</strong> , també sense restriccions. </p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Durant tots aquestos exercicis de DDL pot ser molt convenient tenir obertes
+les dues connexions: la de <strong>FACTURA</strong> (per anar consultant) i la de
+<strong>factura_local</strong> (per anar creant i modificant).</p>
+</div>
+<h3 id="221-restriccions-constraint">2.2.1 Restriccions (Constraint)</h3>
+<p>Per mig de les restriccions podrem definir dins d'una taula restriccions
+d'usuari com són la definició de la clau principal, claus externes, camps no
+nuls i camps únics.</p>
+<p>Hi ha dues maneres de definir restriccions: les que afecten a un únic camp (i
+que es posen en la mateixa definició del camp) i les que afecten o poden
+afectar a més d'un camp, que s'han de definir separadament de la definició
+dels camps. Comencem per les primeres, per ser més senzilles d'entendre:</p>
+<h4 id="2211-restriccions-de-camp-unic">2.2.1.1 Restriccions de camp únic</h4>
+<p>Són restriccions que es posen en la mateixa definició del camp i només
+afectaran a aquest camp: van per tant després del tipus de dades del camp i
+abans de la coma de separació dels camps.</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>  [ CONSTRAINT nom ] {PRIMARY KEY | UNIQUE | NOT NULL | REFERENCES taula2 [(camp1)] | CHECK (_condició_)}
+</code></pre>
+<p>Si no posem nom a la restricció (CONSTRAINT nom) PostgreSQL li assignarà
+automàticament un nom. Açò pot resultar còmode en ocasions, per a no haver
+d'inventar-nos noms per a les restriccions, però després ens limitaria a que
+no podríem retocar aquestes restriccions.</p>
+<p>Els tipus de restriccions que podem definir són:</p>
+<p><strong class="azul">Restricció de clau principal</strong></p>
+<ul>
+<li><strong>PRIMARY KEY</strong> : el camp serà clau principal.</li>
+</ul>
+<blockquote>
+<p>Per exemple, d'aquesta manera definirem la taula EMPLEAT3 (com la de
+l'apartat anterior) amb el camp dni com a clau principal. Recordeu que l'heu
+d'esborrar primer (potser no l'estigueu visualitzant, però sí que
+està creada; refresqueu constantment les taules per saber la situació
+actual)</p>
+</blockquote>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE )
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Podeu comprovar que, si no poseu nom a la restrició, és a dir, si poseu
+directament dni <strong>TEXT(10) PRIMARY KEY</strong>, i aneu al disseny de la taula,
+PostgreSQL posa automàticament un nom a la restricció format pel nom de la taula seguit de <strong>_pkey</strong>.</p>
+</div>
+<blockquote>
+<blockquote>
+<p>Tingueu en compte també que si la taula ja existia donarà un error. Només
+heu d'esborrar-la primer.</p>
+</blockquote>
+</blockquote>
+<p><strong class="azul">Restricció d'unicitat</strong></p>
+<ul>
+<li><strong>UNIQUE</strong> : el camp serà únic, és a dir, no es podrà agafar dues vegades el mateix valor en aquest camp (<em>Indexat sense duplicats</em> en Access). PostgreSQL generarà automàticament un índex per a aquest camp. Veurem què és un índex en la pregunta 6.</li>
+</ul>
+<blockquote>
+<p>Per exemple, d'aquesta manera definiríem la taula EMPLEAT3 amb la restricció
+que el camp <strong>nom</strong> no es pot repetir (si voleu provar la sentència feu-lo
+en la BD <strong>proves</strong> , i si ja existeix l'esborreu primer):</p>
+</blockquote>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR CONSTRAINT u_nom UNIQUE,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE )
+</code></pre>
+<p><strong class="azul">Restricció de valor no nul</strong></p>
+<ul>
+<li><strong>NOT NULL</strong> : el camp no podrà agafar un valor nul (<em>Requerido</em> en Access). Hem de ser conscients que no val la pena definir com a no nula la clau principal, ja que per definició ja ho és.</li>
+</ul>
+<blockquote>
+<p>Per exemple, d'aquesta manera definirem que el camp <strong>nom</strong> ha de ser no
+nul.</p>
+</blockquote>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR CONSTRAINT nn_nom NOT NULL ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE )
+</code></pre>
+<p><strong class="azul">Restricció d'integritat referencial</strong></p>
+<ul>
+<li><strong>REFERENCES</strong> : servirà per a definir que aquest camp és una clau externa. Haurem d'especificar obligatòriament la taula a la qual apunta, i opcionalment podem posar entre parèntesis el camp de la taula al qual apunta, encara que si no ho posem, per defecte apuntarà a la clau principal (i nosaltres sempre voldrem apuntar a la clau principal).</li>
+</ul>
+<blockquote>
+<p>Per exemple, d'aquesta manera podem definir la clau externa que apunta a la
+taula DEPARTAMENT (i que indica que l'empleat pertany al departament). Abans
+de crear aquesta versió de EMPLEAT3, hem de tenir creada la taula
+DEPARTAMENT, sinó donarà error:</p>
+</blockquote>
+<pre><code>  CREATE TABLE DEPARTAMENT  
+        ( num_d INT2 CONSTRAINT cp_dep PRIMARY KEY ,  
+        nom_d VARCHAR(50) ,  
+        director VARCHAR(10) ,  
+        data DATE );
+
+  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE );
+</code></pre>
+<blockquote>
+<p>Com ja es va veure en el tema del Model Relacional (restriccions d'integritat referencial), hi ha 3 maneres d'actuar quan s'esborra o es modifica una fila de la taula
+principal que té associades files en la taula relacionada per mig de la clau
+externa. Per exemple, què fem amb els familiars d'un empleat si esborrem
+l'empleat? Aquestes maneres d'actuar s'han d'especificar en el moment de
+definir la clau externa. La manera de posar-les en SQL i el significat són
+les següents:</p>
+<ul>
+<li>
+<p><strong>NO ACTION</strong> : no es deixarà esborrar o modificar de la taula
+principal si en té alguna fila relacionada. És l'opció per defecte. Així en
+l'exemple d'EMPLEAT3, amb una clau externa que apunta a DEPARTAMENT, si
+intentem esborrar o modificar el numero d'un departament que té empleats,
+ens donarà un missatge d'error, avisant que com té registres relacionats en
+una altra taula no es pot esborrar o modificar.
+</p>
+</li>
+<li>
+<p><strong>CASCADE</strong> : s'esborraran (o modificaran) en cascada els registres
+relacionats de la taula on està la clau externa. S'especificarà amb <strong>ON
+DELETE CASCADE</strong> o <strong>ON UPDATE CASCADE</strong>.</p>
+</li>
+</ul>
+</blockquote>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ON DELETE
+        CASCADE ON UPDATE CASCADE ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE )
+</code></pre>
+<blockquote>
+<p>D'aquesta manera si esborrem un departament de la taula DEPARTAMENT,
+s'esborraran també els empleats de la taula EMPLEATS3 d'aquest departament.
+I si en la taula DEPARTAMENT modifiquem un número de departament, per
+exemple de 5 a 50, aquest valor serà el nou valor en el camp departament de
+la taula EMPLEAT3 per a aquells que abans teníen un 5.
+</p>
+<ul>
+<li><strong>SET NULL</strong> : posarà a nul el camp que és clau externa dels registres
+que estiguen relacionats amb l'esborrat o modificat de la taula principal.
+Així, si férem la següent definició de la taula EMPLEAT3</li>
+</ul>
+</blockquote>
+<pre><code>    CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ON DELETE
+        SET NULL ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE )
+</code></pre>
+<blockquote>
+<p>en el cas que esborrem el departament 5, no donaria cap error per aquesta
+restricció d'integritat, i posaria a nul el departament d'aquells empleats
+que abans eren del departament 5.
+</p>
+<ul>
+<li><strong>SET DEFAULT</strong>: Estableix les columnes que referencien als seus valors per defecte. Ha d'existir una fila en la taula referenicada que coincidixca amb els valors per defecte, si no són NULL, o l'opració fallarà.</li>
+</ul>
+</blockquote>
+<p><strong class="azul">Restricció externa</strong></p>
+<ul>
+<li><strong>CHECK</strong> : farà una comprovació per a validar els valors introduïts per a aquest camp. La condició de validació ha d'anar entre parèntesis, i ha de ser una expressió, normalment de comparació del camp en qüestió amb algun valor.</li>
+</ul>
+<p>Per exemple, anem a exigir que el sou siga estrictament positiu (per tipus de
+dades numèric, podria agafar el valor 0 o valors negatius)</p>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) CONSTRAINT sou_positiu CHECK (sou &gt; 0),  
+        departament INT2 ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE )
+</code></pre>
+<p>Evidentment es pot posar més d'una restricció en la definició d'una taula. En
+aquest exemple arrepleguem totes les anteriors, és a dir, definim la taula
+<strong>EMPLEAT3</strong> amb tots els seus camps, i definint la <em>clau principal</em>
+(<strong>dni</strong>), amb el camp <strong>nom</strong> <em>únic</em> , amb el <strong>sou</strong> <em>estrictament positiu</em>, i amb el camp <strong>departament</strong> que serà <em>clau externa</em> que apunta a la taula
+DEPARTAMENT. Per complicar-lo un poc més també exigirem que el camp <strong>nom</strong>
+siga <em>no nul</em>, i així veure que es pot posar més d'una restricció en un camp.</p>
+<pre><code>CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY ,  
+        nom VARCHAR CONSTRAINT u_nom UNIQUE CONSTRAINT nn_nom NOT NULL ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) CONSTRAINT sou_positiu CHECK (sou &gt; 0) ,  
+        departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE )
+</code></pre>
+<p>Observeu que com a qüestió d'estil s'han posat noms a les restriccions que
+d'alguna manera suggereixen el motiu de la restricció. Així, <strong>cp_emp3</strong> vol
+dir <em>clau princpal de EMPLEAT3</em> , <strong>u_nom</strong> vol dir que el camp <em>nom</em> és
+<em>únic</em> , <strong>nn_nom</strong> vol dir que <em>nom</em> és <em>no nul</em> , <strong>nn_sou</strong> vol dir que
+<em>sou</em> és <em>no nul</em> , i <strong>ce_emp3_dep</strong> vol dir <em>clau externa de la taula
+EMPLEAT3 a la taula DEPARTAMENT</em>. Si tenim un criteri clar per als noms de les
+restriccions, si després les volem desactivar temporalment o senzillament
+esborrar-les, ho podrem fer des de SQL.</p>
+<h4 id="2212-restriccions-de-camp-multiple">2.2.1.2 Restriccions de camp múltiple</h4>
+<p>També s'anomenen restriccions de taula, en contraposició a les anteriors, que
+són restriccions de camp. Són restriccions que van dins de la definició d'una
+taula però fora de la definició d'un camp, i que poden afectar a un o més d'un
+camp. S'haurà de definir expressament a quin o quins camps afecten.</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>  [ CONSTRAINT nom ] {PRIMARY KEY | UNIQUE | FOREIGN KEY | CHECK (_condicio_)} (c11 [,c12][,...])   
+  [ REFERENCES taula2 [ (c21 [,c22][,...]) ] ]  
+  [ ON DELETE {CASCADE | SET NULL}] [ON UPDATE {CASCADE | SET NULL}] ]
+</code></pre>
+<p>Igual que abans, si no posem nom a la restricció (CONSTRAINT nom) PostgreSQL
+li n'assignarà un automàticament, que serà construït de manera molt lògica.</p>
+<p>Observeu que ara sempre especifiquem el o els camps afectats.</p>
+<p>Els tipus de restriccions són els mateixos que en el cas anterior, però la
+sintaxi variarà lleugerament:</p>
+<p><strong class="azul">Restricció de clau principal</strong></p>
+<ul>
+<li><strong>PRIMARY KEY</strong> : posarem entre parèntesis el camp o camps (en aquest cas separats per comes) que seran clau principal.</li>
+</ul>
+<blockquote>
+<p>Per exemple, definim una altra vegada el camp dni com a clau principal de la
+taula EMPLEAT3</p>
+</blockquote>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+        CONSTRAINT cp_emp3 PRIMARY KEY (dni) )
+</code></pre>
+<blockquote>
+<p>I ara un altre per a definir la clau principal de FAMILIAR. Com la clau està
+formada per 2 camps, estem obligats a utilitzar una restricció de camp
+múltiple.</p>
+</blockquote>
+<pre><code>  CREATE TABLE FAMILIAR  
+        ( dni VARCHAR(10),  
+        nom VARCHAR,  
+        data_n DATE,  
+        parentesc VARCHAR(50),  
+        CONSTRAINT cp_fam2 PRIMARY KEY (dni,nom) )
+</code></pre>
+<blockquote>
+<p>Com comentàvem, si la clau principal està formada per 2 camps estarem
+obligats a utilitzar una restricció de camp múltiple. Un <strong class="rojo">error</strong> prou comú
+seria el següent:</p>
+</blockquote>
+<pre><code>  CREATE TABLE FAMILIAR2
+        ( dni VARCHAR(10) PRIMARY KEY,
+        nom VARCHAR PRIMARY KEY,
+        data_n DATE,
+        parentesc VARCHAR(50) )
+</code></pre>
+<blockquote>
+<p>Podeu comprovar que donarà <strong class="rojo">error</strong> , perquè estem intentant definir 2
+claus principals. La clau principal és única, això sí formada per 2 camps en
+aquesta ocasió.</p>
+</blockquote>
+<p><strong class="azul">Restricció d'unicitat</strong></p>
+<ul>
+<li><strong>UNIQUE</strong> : ara posarem entre parèntesis el o els camps que seran únics (en el seu conjunt). PostgreSQL generarà automàticament un índex per a aquesta combinació de camps. Veurem què és un índex en la pregunta 6.</li>
+</ul>
+<blockquote>
+<p>Per exemple, modifiquem la definició de EMPLEAT3 (anomenant-la EMPLEAT4) ,
+amb un camp per als <strong>cognoms</strong> i un camp per al <strong>nom</strong>. Definirem la
+restricció que els camps cognoms i nom (en conjunt) no es poden repetir.</p>
+</blockquote>
+<pre><code>  CREATE TABLE EMPLEAT4  
+        ( dni VARCHAR(10),  
+        cognoms VARCHAR,  
+        nom VARCHAR,  
+        data_naixement DATE,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 ,  
+        CONSTRAINT u_nom4 UNIQUE (cognoms,nom) )
+</code></pre>
+<p><strong class="azul">Restricció de valor no nul</strong></p>
+<ul>
+<li><strong>NOT NULL</strong>.</li>
+</ul>
+<blockquote>
+<p>No existeix aquesta opció com a restricció múltiple. Per tant s'ha de
+definir sempre com a restricció de camp únic.</p>
+</blockquote>
+<p><strong class="azul">Restricció d'integritat referencial</strong></p>
+<ul>
+<li><strong>FOREIGN KEY</strong> : servirà per a definir que aquest o aquestos camps són una clau externa. És la que més varia en la seua sintaxi, ja que hem d'especificar tant el o els camps d'aquesta taula que són clau externa, com la taula a la qual apunta (i en tot cas el o els camps on s'apunta, encara que si no ho posem apuntarà a la clau principal de l'altra taula, cosa que voldrem sempre):<pre><code>[CONSTRAINT nom] FOREIGN KEY (c11 [,c12][,...]) REFERENCES taula2 [(c21 [,c22][,...])] [ON DELETE {CASCADE | SET NULL}] [ON UPDATE {CASCADE | SET NULL}]
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>En l'exemple de la clau externa que apunta a la taula DEPARTAMENT quedarà
+així:</p>
+</blockquote>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+        CONSTRAINT ce_emp3_dep FOREIGN KEY (departament) REFERENCES DEPARTAMENT )
+</code></pre>
+<p><strong class="azul">Restricció externa</strong></p>
+<ul>
+<li><strong>CHECK</strong> : ara la condició de validació podrà afectar a més d'un camp</li>
+</ul>
+<p>Per exemple podríem exigir que la data d'incorporació siga estrictament
+posterior a la data de naixement</p>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+        CONSTRAINT check_dates CHECK (data_incorporacio &gt; data_naixement) )
+</code></pre>
+<p>O una altra una miqueta més real, anem a agafar empleats de més de 18 anys, i
+per tant anem a exigir que la data d'incorporació siga més de 18 anys
+posterior a la data de naixement. Per a això utilitzem la funció
+<strong>AGE(f1,f2)</strong> que calcula el temps entre la data d2 i la data d1 (que ha de
+ser la posterior), i d'ahí extraurem els anys amb <strong>EXTRACT(year FROM ...)</strong></p>
+<pre><code>  CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) ,  
+        nom VARCHAR ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) ,  
+        departament INT2 ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+        CONSTRAINT check_dates  
+        CHECK (EXTRACT(year FROM AGE(data_incorporacio,data_naixement) ) &gt;=18 ) )
+</code></pre>
+<p>Evidentment, es poden barrejar les restriccions de camp únic i les de camp
+múltiple. Ací en tenim un exemple on s'arrepleguen moltes (no totes) les
+restriccions anteriors. Hem posat de camp múltiple la dels 18 anys dels
+empleats, perquè no hi ha un altre remei, i també la de no repetició del camp
+<strong>nom</strong> , encara que podia ser de camp únic:</p>
+<pre><code>CREATE TABLE EMPLEAT3  
+        ( dni VARCHAR(10) CONSTRAINT cp_emp3 PRIMARY KEY ,  
+        nom VARCHAR CONSTRAINT nn_nom NOT NULL ,  
+        data_naixement DATE ,  
+        sou NUMERIC(6,2) CONSTRAINT sou_positiu CHECK (sou &gt; 0) ,  
+        departament INT2 CONSTRAINT ce_emp3_dep REFERENCES DEPARTAMENT ,  
+        poblacio VARCHAR(50) DEFAULT 'Castelló' ,  
+        data_incorporacio DATE DEFAULT CURRENT_DATE ,  
+        CONSTRAINT u_nom3 UNIQUE (nom) ,  
+        CONSTRAINT check_dates  
+        CHECK (EXTRACT(year FROM AGE(data_incorporacio,data_naixement) ) &gt;=18 ) )
+</code></pre>
+<h3 id="exercicis_1"><img alt="✏️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/270f.png" title=":pencil2:" /> Exercicis</h3>
+<p><img alt="" src="../factura_rel.png" /></p>
+<p>En <strong>factura_local</strong>:</p>
+<blockquote>
+<p><strong>Ex_3</strong> - Crear la taula <strong>PROVINCIA</strong> , amb la clau principal.</p>
+<p><strong>Ex_4</strong> - Crear la taula <strong>POBLE</strong> , amb la clau principal i la restricció
+que el camp <strong>cod_pro</strong> és clau externa que apunta a PROVINCIA.</p>
+<p><strong>Ex_5</strong> - Crear la taula <strong>VENEDOR</strong> , amb la clau principal i la clau
+externa a POBLE (de moment no definim la clau externa a VENEDOR, que és
+reflexiva).</p>
+<p><strong>Ex_6</strong> - Crear la taula <strong>CLIENT</strong> , amb la clau principal i la clau externa
+a POBLE</p>
+<p><strong>Ex_7</strong> - Crear la taula <strong>FACTURA</strong> , amb la clau principal i les claus
+externes a CLIENT i VENEDOR. També heu d'exigir que <strong>cod_cli</strong> siga no nul.</p>
+<p><strong>Ex_8</strong> - Crear la taula <strong>LINIA_FAC</strong> , amb la clau principal (observa que
+està formada per 2 camps) però de moment sense la clau externa que apunta a
+ARTICLE. A més <strong>cod_a</strong> ha de ser no nul.</p>
+</blockquote>
+<h2 id="23-alter-table">2.3 ALTER TABLE</h2>
+<p>Permet modificar l'estructura d'una taula ja existent, bé afegint, llevant o
+modificant camps (columnes), bé afegint o llevant restriccions. També servirà
+per a canviar el nom d'un camp i fins i tot canviar el nom de la taula</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<p>Per a alterar l'estructura d'algun camp o restricció utilitzarem aquesta
+sintaxi:</p>
+<pre><code>  ALTER TABLE taula  
+        {ADD | DROP | ALTER} {COLUMN camp | CONSTRAINT restricció múltiple}
+</code></pre>
+<p>Per a canviar el nom d'un camp:</p>
+<pre><code>  ALTER TABLE taula  
+        RENAME [COLUMN] camp TO nou_nom_camp
+</code></pre>
+<p>Per a canviar el nom de la taula:</p>
+<pre><code>ALTER TABLE taula  
+  RENAME TO nou_nom_taula
+</code></pre>
+<p><strong class="azul">Afegir camp o restricció</strong></p>
+<p>Si volem afegir una columna o una restricció, l'haurem de definir totalment.</p>
+<ul>
+<li>
+<p>En el cas d'un camp, haurem d'especificar el nom, el tipus i opcionalment una restricció que afecte només al camp. Per exemple, aquesta sentència afegeix el camp supervisor (de tipus text de 10) a la taula EMPLEAT3. Observeu que en la definició del camp poden entrar restriccions de camp únic.</p>
+<pre><code>ALTER TABLE EMPLEAT3  
+    ADD COLUMN supervisor VARCHAR(10)
+</code></pre>
+</li>
+<li>
+<p>En el cas d'una restricció, aquesta serà del tipus de restricció múltiple, amb la sintaxi que vam veure en l'apartat de restriccions. Per exemple, aquesta sentència afegeix la clau externa reflexiva (de EMPLEAT3 a EMPLEAT3) que indica els supervisors. El dni hauria de ser la clau principal de EMPLEAT3</p>
+<pre><code>ALTER TABLE EMPLEAT3  
+    ADD CONSTRAINT ce_emp3_emp3 FOREIGN KEY (supervisor) REFERENCES EMPLEAT3 (dni)
+</code></pre>
+</li>
+</ul>
+<p><strong class="azul">Modificar un camp</strong></p>
+<p>Podem fer dues coses: modificar el tipus del camp o modificar el valor per
+defecte (posar valor per defecte o llevar-lo)</p>
+<p>Per a canviar el tipus haurem d'utilitzar la <strong>sintaxi</strong>... ALTER COLUMN <em>camp</em>
+TYPE <em>nou_tipus</em> **. Per exemple anem a fer que el camp poblacio siga de 25
+caràcters</p>
+<pre><code>  ALTER TABLE EMPLEAT3  
+        ALTER COLUMN poblacio TYPE VARCHAR(25)
+</code></pre>
+<p>Canviar el tipus de dades és automàtic quan els tipus són compatibles entre
+ells. Si no ho són ens donarà error, però segurament ho podrem esquivar amb la
+clàusula<strong>USING</strong> , que ens permet posar a continuació el camp i aprofitem per
+a posar un <strong>operador de conversió de tipus</strong> (<strong>::</strong>) amb aquesta <strong>sintaxi</strong>:</p>
+<pre><code>  ALTER TABLE _TAULA_  
+        ALTER COLUMN _camp_ TYPE _tipus_nou_ USING _camp_ ::_tipus_nou_
+</code></pre>
+<p>Per a canviar el valor per defecte utilitzarem la <strong>sintaxi</strong>: **... ALTER COLUMN <em>camp</em> {SET | DROP} DEFAULT [<em>expressió</em>] **</p>
+<pre><code>  ALTER TABLE EMPLEAT3  
+        ALTER COLUMN poblacio DROP DEFAULT
+</code></pre>
+<p><strong class="azul">Esborrar camp o restricció</strong></p>
+<p>Si volem llevar un camp o una restricció és suficient amb especificar el nom
+del camp o de la restricció (per això pot ser molt interessant donar nom a les
+restriccions). En el primer exemple llevem la clau externa del supervisor. En
+la segona llevem el camp supervisor.</p>
+<pre><code>  ALTER TABLE EMPLEAT3  
+        DROP CONSTRAINT ce_emp3_emp3;
+
+  ALTER TABLE EMPLEAT3  
+        DROP COLUMN supervisor
+</code></pre>
+<p><strong class="azul">Renomenar un camp</strong></p>
+<p>Per exemple renomenem el camp <strong>data_incorporacio</strong> a <strong>data_inc</strong> :</p>
+<pre><code>  ALTER TABLE EMPLEAT3  
+        RENAME COLUMN data_incorporacio TO data_inc
+</code></pre>
+<p><strong class="azul">Renomenar la taula</strong></p>
+<p>Ara li posarem el nom EMP3 a la taula EMPLEAT3</p>
+<pre><code>  ALTER TABLE EMPLEAT3  
+        RENAME TO EMP3
+</code></pre>
+<p><strong><u>Exemples</u></strong></p>
+<p>1) Modificar la taula <strong>EMP3</strong> per afegir el camp cp (codi postal) de tipus text de 5 caràcters.</p>
+<pre><code>  ALTER TABLE EMP3 ADD COLUMN cp VARCHAR(5);
+</code></pre>
+<p>2) Modificar la taula <strong>EMP3</strong> per modificar el camp anterior i que siga de tipus numèric.</p>
+<pre><code>  ALTER TABLE EMP3 ALTER COLUMN cp TYPE NUMERIC(5) USING CP::NUMERIC;
+</code></pre>
+<p>3) Modificar la taula <strong>EMP3</strong> per afegir la restricció (encara que siga un poc estranya) que no es pot repetir la combinació codi postal i població.</p>
+<pre><code>  ALTER TABLE EMP3 ADD CONSTRAINT u_cp_pobl UNIQUE (cp,poblacio);
+</code></pre>
+<p>4) Modificar la taula <strong>EMP3</strong> per esborrar la restricció anterior</p>
+<pre><code>  ALTER TABLE EMP3 DROP CONSTRAINT u_cp_pobl;
+</code></pre>
+<p>5) Modificar la taula <strong>EMP3</strong> per modificar el nom del camp <strong>cp</strong> a <strong>codi_postal</strong></p>
+<pre><code>  ALTER TABLE EMP3 RENAME COLUMN cp TO codi_postal;
+</code></pre>
+<p>6) Renomenar la taula <strong>EMP3</strong> a <strong>EMPLEAT3</strong></p>
+<pre><code>  ALTER TABLE EMP3 RENAME TO EMPLEAT3;
+</code></pre>
+<h3 id="exercicis_2"><img alt="✏️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/270f.png" title=":pencil2:" /> Exercicis</h3>
+<p><img alt="" src="../factura_rel.png" /></p>
+<p>En <strong>factura_local</strong>:</p>
+<p><strong>Ex_9</strong> - Afegir un camp a la taula <strong>VENEDOR</strong> anomenat <strong>alies</strong> de tipus
+text, que ha de ser no nul i únic.</p>
+<p><strong>Ex_10</strong> - Esborrar el camp anterior, <strong>alies</strong> , de la taula <strong>VENEDOR</strong>.</p>
+<p><strong>Ex_11</strong> - Afegir la clau principal de <strong>CATEGORIA</strong>.</p>
+<p><strong>Ex_12</strong> - En la taula <strong>ARTICLE</strong> afegir la clau principal i la clau externa a
+CATEGORIA.</p>
+<p><strong>Ex_13</strong> - En la taula <strong>LINIA_FAC</strong> afegir la clau externa que apunta a
+FACTURA, <strong>exigint que s'esborre en cascada</strong> (si s'esborra una factura,
+s'esborraran automàticament les seues línies de factura). I també la clau
+externa que apunta a ARTICLE (aquesta normal, és a dir NO ACTION)</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Per a no fer-lo massa llarg s'han deixat de definir alguna restricció,
+  concretament la reflexiva de VENEDOR a VENEDOR (que marca el cap)</p>
+</div>
+<h2 id="24-drop-table">2.4 DROP TABLE</h2>
+<p>Ens servirà per esborrar absolutament una taula, tant les dades com
+l'estructura. S'ha d'anar amb compte amb ella, perquè és una operació que no
+es pot desfer, i per tant potencialment molt perillosa.</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>  DROP TABLE taula
+</code></pre>
+<p><strong><u>Exemples</u></strong></p>
+<pre><code>  DROP TABLE FAMILIAR
+</code></pre>
+<h2 id="25-index">2.5 Índex</h2>
+<p>Els índex són estructures de dades que permeten mantenir ordenada una taula
+respecte a un o més d'un camp, cadascun d'ells de forma ascendent o
+descendent.</p>
+<p>Tenir un índex per un determinat camp o camps permet reduir dràsticament el
+temps utilitzat en ordenar per ells (perquè ja es manté aquest ordre) i també
+quan es busca un determinat valor d'aquest camp, ja que com està ordenat es
+poden fer recerques binàries o dicotòmiques. Quan no està ordenat no hi ha més
+remei que fer una recerca seqüencial, que és considerablement més lenta.</p>
+<p>De tota manera no s'ha d'abusar dels índex, ja que és una estructura
+addicional de dades que ocuparà espai, i que com s'han de mantenir els índex
+constantment actualitzats, cada vegada que es realitza una operació
+d'actualització (inserció, modificació o esborrat) s'ha de reestructurar
+l'índex, per a posar o llevar l'element al seu lloc.</p>
+<!--
+El següent vídeo intenta explicar de forma molt senzilla com es podria
+implementar un índex, per poder observar les característiques anteriors. Hem
+de ser conscients, però, que tot aquest procés és transparent per a l'usuari,
+que només notaria, en crear un índex, que els SELECT van més ràpids, i els
+INSERT, DELETE i UPDATE van més lents.-->
+
+<p><strong class="azul">Creació d'índex</strong></p>
+<p>A banda de la creació explícita d'índex que farem en aquesta pregunta,
+PostgreSQL crea implícitament un índex cada vegada que:</p>
+<ul>
+<li>Creem una clau princpal</li>
+<li>Creem una restricció d'unicitat (UNIQUE)</li>
+</ul>
+<p>En ambdós casos serà un índex que no es podrà repetir. Per tant, en els casos
+anteriors no cal crear un índex, perquè PostgreSQL ja ho ha fet
+automàticament.</p>
+<p>En PostgreSQL la creació d'índex és molt completa. Anem a veure una versió
+resumida:</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>    CREATE [UNIQUE] INDEX nom_índex  
+         ON taula (c1 [ASC|DESC][, c2 [ASC|DESC], ...] [NULLS { FIRST | LAST }] )
+</code></pre>
+<p>Si posem l'opció UNIQUE impedirà que es repetisquen els valors del camp (o
+camps) que formen l'índex, de forma similar a la restricció UNIQUE del
+CONSTRAINT.</p>
+<p><strong>L'opció d'ordenació per defecte és l'ascendent.</strong></p>
+<p>Podem fer que els nuls estiguen al principi de tot o al final de tot, segons
+ens convinga:</p>
+<ul>
+<li>
+<p><strong>FIRST</strong> : farà que en l'ordenació, els valors nuls vagen abans de qualsevol altre valor. Aquesta és l'opció per defecte, si l'ordre és descendent, a més de crear l'índex fa que siga clau principal. 
+  Evidentment no ha d'haver una clau principal creada amb anterioritat.</p>
+</li>
+<li>
+<p><strong>LAST</strong> : els valors nuls estaran al final de tot, després de qualsevol altre valor. És l'opció per defecte quan l'ordre és ascendent.</p>
+</li>
+</ul>
+<p><strong><u>Exemples</u></strong></p>
+<p>1) Crear un índex en la taula <strong>EMPLEAT4</strong> per al camp <strong>departament</strong> en ordre ascendent .</p>
+<pre><code>  CREATE INDEX i_dep ON EMPLEAT4 (departament);
+</code></pre>
+<p>2) Crear un index per al camp <strong>data_naixement</strong>(descendent) i <strong>sou</strong>(ascendent) en la taula <strong>EMPLEAT4</strong>. En els dos casos, <strong>data_naixement</strong> i <strong>sou</strong> , s'han d'ordenar els valors nuls al final</p>
+<pre><code>  CREATE INDEX i_dat_sou ON EMPLEAT4 (data_naixement DESC NULLS LAST, sou NULLS
+  LAST);
+</code></pre>
+<p><strong class="azul">Esborrar un índex</strong></p>
+<p>La sentència d'esborrar un índex és molt senzilla. Només hem d'especificar el
+nom de l'índex i la taula on està definit.</p>
+<pre><code>  DROP INDEX nom_índex ON taula
+</code></pre>
+<h3 id="exercicis_3"><img alt="✏️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/270f.png" title=":pencil2:" /> Exercicis</h3>
+<p>En <strong>factura_local</strong>:</p>
+<p><strong>Ex_14</strong> - Afegir un índex anomenat <strong>i_nom_cli</strong> a la taula <strong>CLIENT</strong> pel camp
+<strong>nom</strong>.</p>
+<p><strong>Ex_15</strong> - Afegir un índex anomenat <strong>i_adr_ven</strong> a la taula <strong>VENEDOR</strong> per a
+que estiga ordenat per <strong>cp</strong> (ascendent) i <strong>adreca</strong> (descendent).</p>
+<h2 id="26-vistes">2.6 Vistes</h2>
+<p>Les vistes, també anomenades esquemes externs, consisteixen en visions
+particulars de la B.D. Es correspon al nivell extern de l'arquitectura a tres
+nivells. Les taules, que són les que realment contenen les dades i donen la
+visió global de la B.D., corresponen al nivell conceptual.</p>
+<p><strong class="azul">Creació d'una vista</strong></p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>  CREATE VIEW _nom_vista_  
+    AS _subconsulta_  
+    [WITH READ ONLY];
+</code></pre>
+<p>on se li dóna un nom, és el resultat d'una subconsulta (un SELECT), i tenim la
+possibilitat d'impedir la modificació de les dades.</p>
+<p>Per exemple, una vista amb les comarques, el número de poblacions de cada
+comarca, el total d'habitats i l'altura mitjana:</p>
+<pre><code>  CREATE OR REPLACE VIEW ESTADISTICA AS  
+        SELECT nom_c, count(nom) AS num_p,sum(poblacio) AS pobl, avg(altura) AS alt_mitjana  
+              FROM POBLACIONS  
+              GROUP BY nom_c  
+              ORDER BY nom_c;
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Si voleu provar aquesta vista, ho podeu fer en la Base de Dades <strong>geo</strong> , ja
+que en ella tenim dades per a la consulta que proporciona les dades a la
+vista. Recordeu que ens estem connectant tots com el mateix usuari, per tant
+si algú ha creat un objecte (en aquest cas una vista) no es podrà utilitzar
+aquest nom per a crear un altre objecte. Per això és convenient que si feu una
+prova de crear un objecte, després esborreu aquest objecte.</p>
+</div>
+<p>Observeu la sintaxi CREATE OR REPLACE, que va molt bé per a crear, i si ja
+existeix per a substituir. Com que estem accedint tots com el mateix usuari,
+serà prou normal que l'objecte ja existesca per haver-lo creat un company.
+D'aquesta manera el substituirem. No passa res per esborrar un objecte ja
+existent, ja que tot açò són proves.</p>
+<p>La manera d'utilitzar-la és com una taula normal, però ja sabem, que en
+realitat les dades estan en les taules.</p>
+<pre><code>  SELECT *  
+    FROM ESTADISTICA;
+</code></pre>
+<p>I fins i tot es pot jugar amb taules i vistes. En aquesta sentència traurem la
+província, nom de la comarca, número de pobles i altura mitjana de les
+comarques amb 5 o menys pobles:</p>
+<pre><code>  SELECT provincia,COMARQUES.nom_c,num_p,alt_mitjana  
+    FROM COMARQUES , ESTADISTICA  
+    WHERE COMARQUES.nom_c=ESTADISTICA.nom_c and num_p &lt;= 5;
+</code></pre>
+<p><strong class="azul">Esborrar una vista</strong></p>
+<p>Per a esborrar una vista</p>
+<pre><code>  DROP VIEW _nom_vista_
+</code></pre>
+<p>Per exemple, per a esborrar la vista anterior:a esborrar una vista</p>
+<pre><code>  DROP VIEW ESTADISTICA;
+</code></pre>
+<h3 id="exercicis_4"><img alt="✏️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/270f.png" title=":pencil2:" /> Exercicis</h3>
+<p>En <strong>factura_local</strong>:</p>
+<p><strong>Ex_16</strong> - Crear la vista <strong>RESUM_FACTURA</strong> , que ens dóne el total dels diners
+de la factura, el total després del descompte d'articles, i el total després
+del descompte de la factura, tal i com teníem en la consulta <strong>Ex_56</strong>. A
+partir d'aquest moment podrem utilitzar la vista per a traure aquestos
+resultats</p>
+<p><strong>Ex 17</strong> - Crear la vista <strong>RESUM_VENEDOR</strong>, on aparega informació del nom del venedor, del nombre total d'articles venuts i de l'import total facturat.</p>
+<p><strong>Ex 18</strong> - Crear la vista <strong>RESUM_CATEGORIAS</strong>, on aparega informació del nom de la categoria, del nombre total d'articles venuts i de l'import total facturat.</p>
+<h2 id="27-creacio-daltres-objectes-sequencies-dominis-i-tipus">2.7. Creació d'altres objectes: seqüències, dominis i tipus.</h2>
+<p>Una de les característiques de PostgreSQL és la seua gran versatilitat.</p>
+<p>En concret es poden crear molts objectes. A banda dels habituals, vistes,
+seqüències,... es poden xcrear més tipus d'objectes. En aquest curs donarem
+una ulladeta als dominis i la definició de nous tipus de dades.</p>
+<p>Hem de tenir en consideració que tots ens connectarem com el mateix usuari per
+a fer proves. Per tant els objectes que creem poden fastidiar a altres
+companys si utilitzem tots els mateixos noms.</p>
+<p>En altres SGBD (com per exemple Oracle) existeix la possibilitat de crear els
+objectes posant <strong>CREATE OR REPLACE ...</strong>, que si no existeix el crea, i si
+existeix el substitueix. Lamentablement en PostgreSQL depén de la versió: en
+les més modernes sí que es pot, però en versions anteriors no podrem, excepte en les vistes i les
+funcions.</p>
+<h3 id="271-sequencies">2.7.1 Seqüències</h3>
+<p><strong class="azul">Creació d'una seqüència</strong></p>
+<p>També es poden crear seqüències (<strong>SEQUENCE</strong>), que són objectes que agafen
+valors numèrics que van incrementant-se (com l'autonumèric).</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>  CREATE SEQUENCE _nom_seqüència_  
+    [START WITH _valor_inicial_]  
+    [INCREMENT BY _valor_increment_] ... ;
+</code></pre>
+<p>La sentència és més llarga, per a considerar més casos. Per a nosaltres està
+bé així.</p>
+<p>Per defecte, el valor inicial és 1, i l'increment també 1.</p>
+<p>És un objecte independent de les taules. S'utilitza de la següent manera:</p>
+<blockquote>
+<p><strong>CURRVAL('<em>nom_seqüència</em>')</strong> torna el valor actual (ha d'estar
+inicialitzat)</p>
+<p><strong>NEXTVAL('<em>nom_seqüència</em>')</strong> incrementa la seqüència i torna el nou
+valor (excepte la primera vegada que l'inicia amb el valor inicial)</p>
+</blockquote>
+<p>La manera habitual d'utilitzar-lo serà per obtenir un valor que s'afegirà a un
+camp d'una taula (normalment la clau principal).</p>
+<p>Suposem que tenim una taula anomenada <strong>FACTURA</strong> amb l'estructura que ve a
+continuació, i volem que la clau principal siga un autonumèric. Ho podem
+provar sobre la Base de Dades i usuari <strong>proves</strong>.</p>
+<pre><code>  CREATE TABLE FACTURA  
+    ( num_f NUMERIC(7) CONSTRAINT cp_fact PRIMARY KEY,  
+    data DATE,  
+    client VARCHAR(10));
+</code></pre>
+<p>Primer ens crearem la seqüència:</p>
+<pre><code>  CREATE SEQUENCE s_num_fac START WITH 2016001;
+</code></pre>
+<p>Després l'utilitzem:</p>
+<pre><code>  INSERT INTO FACTURA VALUES (NEXTVAL('s_num_fac'), '15-01-2016','cli001');
+</code></pre>
+<p>Si ara mirem el contingut de la taula <strong>FACTURA</strong> obtindrem:</p>
+<p><img alt="" src="../T6_III_2_8_1_1.png" /></p>
+<p>O fins i tot en el moment de declarar la taula, li posem un valor per defecte
+al camp, que serà el següent de la seqüència. No haurem d'introduir ara res en
+la columna <strong>num_f</strong> , que agafa el valor de la seqüència</p>
+<pre><code>  CREATE TABLE FACTURA2  
+    ( num_f NUMERIC(7) CONSTRAINT cp_fact2 PRIMARY KEY DEFAULT
+    NEXTVAL('s_num_fac'),  
+    data DATE,  
+    client VARCHAR(10));
+
+  INSERT INTO FACTURA2(data,client) VALUES ('15-01-2016','cli001');
+</code></pre>
+<p>Observeu també que en la taula FACTURA2, el valor comença per <strong>2016002</strong> , ja
+que el primer valor l'havíem utilitzat en FACTURA. Per tant el contingut de la
+taula <strong>FACTURA2</strong> serà:</p>
+<blockquote>
+<blockquote>
+<p><img alt="" src="../T6_III_2_8_1_2.png" /></p>
+</blockquote>
+</blockquote>
+<p>També ho podríem haver fet declarant la clau de tipus <strong>SERIAL</strong> , que el que
+fa és implementar una seqüència, i donar valors successius per al camp on està
+definida. Però d'aquesta manera la seqüència comença sempre per 1</p>
+<pre><code>  CREATE TABLE FACTURA3  
+    ( num_f SERIAL CONSTRAINT cp_fact3 PRIMARY KEY,  
+    data DATE,  
+    client VARCHAR(10));
+</code></pre>
+<p>I després fer la inserció d'aquesta manera:</p>
+<pre><code>  INSERT INTO FACTURA3(data,client) VALUES ('15-01-2016','cli001')
+</code></pre>
+<p>Com comentàvem, el valor introduït per la seqüència serà <strong>1</strong> :</p>
+<p><img alt="" src="../T6_III_2_8_1_3.png" /></p>
+<p>Tornarem a veure aquest exemple en les consultes d'actualització, concretament
+el <strong>INSERT</strong>.</p>
+<p><strong class="azul">Esborrar una seqüència</strong></p>
+<p>Per a esborrar una seqüència utilitzarem la sentència <strong>DROP SEQUENCE</strong> :</p>
+<pre><code>  DROP SEQUENCE s_num_fac
+</code></pre>
+<p>De moment aquesta sentència ens donaria error, ja que la taula <strong>FACTURA2</strong>
+utilitza aquesta seqüència. Esborrarem primer les 3 taules, i després la
+seqüència per a no interferir amb els companys/es.</p>
+<pre><code>  DROP TABLE FACTURA, FACTURA2, FACTURA3;
+
+  DROP SEQUENCE s_num_fac;
+</code></pre>
+<h3 id="272-dominis">2.7.2 Dominis</h3>
+<p>Els dominis són els conjunts de valors que pot agafar un determinat camp.
+Habitualment es posa senzillament un tipus de dades. Però el model relacional
+teòric és més restrictiu, i els dominis encara podrien ser subconjunts
+d'aquestos tipus de dades.</p>
+<p><strong class="azul">Creació d'un  domini</strong></p>
+<p>Normalment aquestos subconjunts es realitzen per mig dels <strong><em>check</em></strong> , que
+permeten una regla de validació (una condició) per a donar les dades com a
+bones (per exemple, un sou sempre és positiu, per tant, a banda de fer que
+siga numèric podríem obligar a que fóra positiu).</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>  CREATE DOMAIN nom AS data_tipus  
+        [CHECK(expresió)| NOT NULL | NULL ];
+</code></pre>
+<p>PostgreSQL permet definir dominis, que seran d'un determinat tipus base, d'una
+grandària determinada (opcional), amb un valor per defecte (opcional) i fins i
+tot amb una clàusula <strong><em>check</em></strong>. A partir d'aquest moment, un o més d'un camp
+els podrem definir d'aquest domini (amb l'avantatge que canviant el domini
+canviem el tipus de tots els camps que el tenen).</p>
+<p>Anem a veure alguns exemples que es poden realitzar sobre l'usuari <strong>proves</strong>.</p>
+<pre><code>  CREATE DOMAIN sou AS numeric(7,2)  
+    CHECK (VALUE &gt; 0);
+</code></pre>
+<p>Si us dóna error perquè ja existia el domini, senzillament esborreu el domini
+anterior i ho torneu a provar</p>
+<p>Ara podríem definir la taula:</p>
+<pre><code>  CREATE TABLE EMPLEAT5  
+    ( cod_e varchar(5) primary key,  
+    nom_e varchar(50),  
+    salari sou);
+</code></pre>
+<p>Si intentem introduir la dada del sou malament (per exemple posant-lo negatiu)
+veurem que dóna error.</p>
+<p><img alt="" src="../T6_3_2_8_2_1.png" /></p>
+<p>Un altre exemple, que farem sobre la Base de Dades <strong>proves</strong> , encara que és
+un exemple basat en les taules que teníem en <strong>geo</strong>.</p>
+<p>En la taula de <strong>POBLACIONS</strong> tenim les coordenades (<strong>latitud</strong> i
+<strong>longitud</strong>). Podríem intentar fer uns dominis per a marcar l'<strong>hemisferi</strong>
+(N S per a latitud, i E W per a longitud), els <strong>graus de latitud</strong> (-90º a
+90º), <strong>graus de longitud</strong> (-180º a 180º) en longitud, per als <strong>minuts</strong> (0'
+a 59') , <strong>segons</strong> (0” a 59”). Centrem-nos en la latitud:</p>
+<pre><code>  CREATE DOMAIN hemi_lat AS char(1)  
+    CHECK (VALUE IN ('N','S'));
+
+
+  CREATE DOMAIN graus_lat AS numeric(2)  
+    CHECK (VALUE BETWEEN 0 AND 90);
+
+
+  CREATE DOMAIN min_seg AS numeric(2)  
+    CHECK (VALUE BETWEEN 0 AND 59);
+</code></pre>
+<p>Ara podríem definir una alternativa a la taula de POBLACIONS:</p>
+<pre><code>  CREATE TABLE POBLACIONS2  
+    ( nom VARCHAR(50) CONSTRAINT cp_pob2 PRIMARY KEY,  
+    lat_h hemi_lat,  
+    lat_g graus_lat,  
+    lat_m min_seg,  
+    lat_s min_seg);
+</code></pre>
+<p>i comprovaríem que les latituds s'han d'introduir correctament. Si posem per
+exemple els minuts malament, dóna error</p>
+<pre><code>  INSERT INTO POBLACIONS2  
+    VALUES('Illes Columbretes','N',39,73,57);
+</code></pre>
+<p><img alt="" src="../T6_3_2_8_2_2.png" /></p>
+<p>Però no hi ha problema si les dades són correctes.</p>
+<pre><code>  INSERT INTO POBLACIONS2  
+    VALUES('Illes Columbretes','N',39,53,57);
+</code></pre>
+<p><img alt="" src="../T6_3_2_8_2_3.png" /></p>
+<p><strong class="azul">Esborrar un domini</strong></p>
+<p>Per a esborrar un domini, utilitzarem DROP DOMAIN.</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>  DROP DOMAIN [IF EXISTS] nom [CASCADE | RESTRICT]
+</code></pre>
+<blockquote>
+<blockquote>
+<ul>
+<li>RESTRICT rebutja eliminar el domini si hi ha objectes que depenen d'ell. Aquest és el valor predeterminat.</li>
+</ul>
+</blockquote>
+</blockquote>
+<p><strong><u>Exemple</u></strong></p>
+<pre><code>  DROP DOMAIN sou;
+</code></pre>
+<p>Si algun camp està definit amb el domini que esborrem, donarà error. Si
+esborràrem amb l'opció CASCADE, s'esborrarien els camps de les taules amb
+aquest domini. Per a deixar que els companys/es puguen treballar també,
+esborrem tot el que hem creat:</p>
+<pre><code>  DROP TABLE EMPLEAT5;
+
+  DROP DOMAIN sou;
+</code></pre>
+<p>Encara no esborrem els dominis <strong>hemi_lat</strong> , <strong>graus_lat</strong> i <strong>min_seg</strong> ,
+perquè els utilitzarem en la següent pregunta.</p>
+<h3 id="273-tipus-de-dades">2.7.3 Tipus de dades</h3>
+<p>Ja havíem comentat que PosgreSQL és molt versàtil, i permet a l'usuari crear
+tipus de dades personals.</p>
+<p>Tres són les maneres de crear un tipus de dades: compost, enumerat i extern.</p>
+<ul>
+<li><strong>Compost</strong> és com un registre, on s'especifiquen els camps i els tipus.</li>
+<li><strong>Enumenat</strong> : posarem els possibles valors entre parèntesis.</li>
+<li><strong>Extern</strong> és molt més complet i complex que permet crear un nou tipus base, amb una estructura interna i amb funcions, normalment creades en C, d'entrada (per a introduir la dada) i eixida (per a representar-la), d'anàlisi, ... Aquest tipus s'escapa dels objectius d'aquest curs</li>
+</ul>
+<p><strong class="azul">Creació de tipus de data Compost</strong></p>
+<p><strong><u>Sintaxi</u></strong></p>
+<p>Posarem entre parèntesi el nom dels camps i el tipus que formaran part
+d'aquest tipus compost.</p>
+<pre><code>  CREATE TYPE nom AS ([nom_camp tipo_camp] [,..])
+</code></pre>
+<p><strong><u>Exemple</u></strong></p>
+<p>Per exemple, sobre la Base de Dades <strong>proves</strong> :</p>
+<pre><code>  CREATE TYPE num_complex AS (a float4, b float4);
+</code></pre>
+<p>que ens serviria per a representar números complexes. Si us dóna error perquè
+ja existieix el tipus (perquè l'ha creat un company/a), senzillament esborreu-
+lo abans i ho torneu a provar</p>
+<blockquote>
+<p>Un altre exemple (no cal fer-lo, és il·lustratiu només):</p>
+</blockquote>
+<pre><code>  CREATE TYPE lat AS (  
+    h char(1),  
+    g numeric(2,0),  
+    m numeric(2,0),  
+    s numeric(2,0));
+</code></pre>
+<p>per a representar la latitud, encara que podríem aprofitar els dominis creats
+en el punt anterior, i ens eixirà millor (aquest sí que el podeu fer):</p>
+<pre><code>  CREATE TYPE lat AS (  
+    h hemi_lat,  
+    g graus_lat,  
+    m min_seg,  
+    s min_seg);
+</code></pre>
+<p>i el tipus lat haurà de respectar les restriccions de cada domini dels quatre
+camps.</p>
+<p>Ara podríem definir una taula</p>
+<pre><code>  CREATE TABLE POBLACIONS3 (  
+    nom VARCHAR(50) CONSTRAINT cp_pob3 PRIMARY KEY,  
+    latitud lat,  
+    comarca varchar(50));
+</code></pre>
+<p>D'aquesta manera queda molt compacte.</p>
+<p>Per exemple, aquesta introducció de dades donarà un error, ja que l'hemisferi
+no és correcte:</p>
+<pre><code>  INSERT INTO POBLACIONS3  
+    VALUES ('Castelló','(K,39,59,10)','Plana Alta');
+</code></pre>
+<p>En canvi aquesta funcionarà perfectament:</p>
+<pre><code>  INSERT INTO POBLACIONS3  
+    VALUES ('Castelló','(N,39,59,10)','Plana Alta');
+</code></pre>
+<p>Per a accedir als camps dels tipus compostos, bé ja definits, bé definits per
+nosaltres, haurem de posar el nom de la columna seguida d'un punt i seguit del
+nom del camp. Però en les sentències SQL se'ns presenta un problema: que
+aquesta sintaxi serveix per a posar també el nom de la taula seguit del nom de
+la columna. </p>
+<p>Així per exemple ens donarà <strong class="rojo">error</strong> la següent sentència, en la que
+volem traure el nom de la població, la latitud i si està en l'hemisferi nord o
+sud:</p>
+<pre><code>  SELECT nom, latitud, latitud.h FROM POBLACIONS3;
+</code></pre>
+<p>L'error el dóna perquè en latitud.h espera que latitud siga una taula i h una
+columna. La manera d'esquivar aquest error és posar entre parèntesis la
+columna:</p>
+<pre><code>  SELECT nom, latitud, (latitud).h FROM POBLACIONS3;
+</code></pre>
+<p>En el tema següent, el de programació en PL/pgSQL veurem que allà no caldrà
+posar els parèntesis, perquè no hi haurà la confusió de taula.columna</p>
+<p><strong class="azul">Creació de tipus de data Enumerat</strong></p>
+<p>El tipus enumerat és un conjunt de dades estàtiques definides en el moment de
+la creació del tipus, amb un ordre també predefinit. Està disponible des de la
+versió <strong>8.3</strong> de PostgreSQL.</p>
+<p><strong><u>Sintaxi</u></strong></p>
+<pre><code>  CREATE TYPE nom AS ENUM
+        ('element' [,...])
+</code></pre>
+<p><strong><u>Exemple</u></strong></p>
+<pre><code>  CREATE TYPE d_set AS ENUM
+    ('dilluns','dimarts','dimecres','dijous','divendres','dissabte','diumenge');
+</code></pre>
+<p>Posteriorment el podrem utilitzar, per exemple, en la definició d'una taula:</p>
+<pre><code>  CREATE TABLE HORARI (  
+    cod_pr NUMERIC(5) PRIMARY KEY,  
+    d_tut d_set,  
+    h_tut NUMERIC(4,2));
+</code></pre>
+<p>Ara el podem utilitzar. Haurem de tenir en compte que els valors són únicament
+els definits. I s'ha de respectar majúscules i minuscules.</p>
+<pre><code>  INSERT INTO HORARI VALUES (1,'dimarts',10);
+</code></pre>
+<p>En canvi, aquesta donaria <strong class="rojo">error</strong>:</p>
+<pre><code>  INSERT INTO HORARI VALUES (2,'Dimecres',12);
+</code></pre>
+<p>ja que el nom de la setmana comença en majúscula.</p>
+<p>Introduïm algunes dades més</p>
+<pre><code>  INSERT INTO HORARI VALUES (2, 'dimecres',12) , (3,'dilluns',9) ,
+  (4,'divendres',11);
+</code></pre>
+<p>Podem comprovar com l'ordre predefint és el del moment de la creació del
+tipus:</p>
+<pre><code>  SELECT * FROM HORARI ORDER BY d_tut;
+</code></pre>
+<p>I com també es pot comprovar en aquesta sentència:</p>
+<pre><code>  SELECT * FROM HORARI WHERE d_tut &gt; 'dimarts';
+</code></pre>
+<p>on només eixiran les files corresponents al dimecres i al divendres (files 2 i
+4).</p>
+<p><strong class="azul">Esborrar tipus de dades</strong></p>
+<p>Per últim, anem a esborrar els objectes que hem creat, per a no interferir amb
+els companys:</p>
+<pre><code>  DROP TABLE POBLACIONS2 , POBLACIONS3 , HORARI ;
+
+  DROP TYPE num_complex , lat , d_set ;
+
+  DROP DOMAIN hemi_lat , graus_lat , min_seg ;
+</code></pre>
+<h3 id="exercicis_5"><img alt="✏️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/270f.png" title=":pencil2:" /> Exercicis</h3>
+<p>En <strong>factura_local</strong>:</p>
+<p><strong>Ex 19</strong> - Tenim creada la taula VENEDOR i es desitja que la clau principal siga una seqüència autonumérica personalitzada. 
+Observa la informació actual en la taula VENEDOR de la BD factura i analitza quina seqüència s'ha utilitzat.</p>
+<p><img alt="" src="../Ex_18.png" /></p>
+<ul>
+<li>A continuació realitza la inserció d'un registre en aquesta taula tenint en compte la seqüència creada, per a comprovar que funciona.</li>
+<li>Finalment elimina els objectes creats. </li>
+<li>Escriu les sentències en l'ordre adequat</li>
+</ul>
+<p><strong>Ex 20</strong> - Volem crear una nova taula CLIENT2 i es vol que la clau principal siga una seqüència personalitzada autonumerica. 
+Observa la informació actual en la taula CLIENT de la BD factura i analitza quina seqüència s'hauria de utilitzat.</p>
+<p><img alt="" src="../Ex_20.png" /></p>
+<ul>
+<li>Has de tindre en compte que al crear la taula CLIENT2 perquè el camp cod_cli, per defecte sempre agafe el valor següent de la seqüència definida anteriorment. </li>
+<li>A continuació realitza la inserció d'un registre en aquesta taula tenint en compte els canvis realitzats en la base de dades. </li>
+<li>Finalment elimina els objectes creats. 
+Escriu les sentències en l'ordre adequat.</li>
+</ul>
+<p><strong>Ex 21</strong> - En la taula FACTURA2 es vol que la clau principal siga una seqüència autonumérica en sèrie.</p>
+<ul>
+<li>Crea la taula FACTURA2 perquè el camp num_f utilitze una seqüència en sèrie.</li>
+<li>A més has de tindre en compte que el iva de la factura solament pot ser el 10 o el 21 i que el descompte la factura ha de ser inferior a 50.</li>
+<li>A continuació realitza la inserció d'un registre en aquesta taula per a comprovar que funciona.</li>
+<li>Finalment elimina els objectes creats.</li>
+<li>Escriu les sentències en l'ordre adequat.</li>
+</ul>
+<p><strong>Ex 22</strong> - Crea la taula ARTICLE2 tenint en compte el següent;</p>
+<ul>
+<li>Comprovar que el preu, stock i stock_min no és negatiu</li>
+<li>Crear un tipus de dades per a l'estat d'un article, que pot prendre els valors "Disponible", "Esgotat" o "En espera".</li>
+<li>
+<p>Crea un tipus de dada per a registrar el codi de barres EAN-13 d'un article. Tenint en compte que el codi de barres EAN-13 s'observen 3 parts:</p>
+<ul>
+<li>País de procedència: són els dos o tres primers dígits i, en el cas d'Espanya, aquest prefix és el 84.</li>
+<li>Codi del producte: següents 9 o 10 dígits.</li>
+<li>Dígit de control: és un sol número, l'últim, i serveix per a corroborar que el codi és correcte.</li>
+</ul>
+</li>
+<li>
+<p>Comprovar que stock no pot ser inferior a stock _min (HAS DE DEFINIR UNA CONSTRAINT)</p>
+</li>
+<li>A continuació realitza la inserció d'un registre en aquesta taula per a comprovar que funciona..</li>
+<li>Finalment elimina els objectes creats.</li>
+<li>Escriu les sentències en l'ordre adequat.</li>
+</ul>
+<p>Llicenciat sota la  <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Llicència Creative Commons Reconeixement NoComercial
+CompartirIgual 3.0</a></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../1_introducci/" class="btn btn-neutral float-left" title="1. Introducció"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../exercicis_de_tot_el_tema/" class="btn btn-neutral float-right" title="Exercicis del tot el tema">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../1_introducci/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../exercicis_de_tot_el_tema/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

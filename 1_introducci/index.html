@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://github.com/asalvadorc/BBDD_POSTGRES_DDL/1_introducci/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>1. Introducció - BD - Bases de Dades</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+        <link href="../img/favicon.ico" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "1. Introducci\u00f3";
+        var mkdocs_page_input_path = "1_introducci.md";
+        var mkdocs_page_url = "/asalvadorc/BBDD_POSTGRES_DDL/1_introducci/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/logocaminas.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">POSTGRESQL - DDL</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">1. Introducció</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#11-installacio-de-docker">1.1 Instal·lació de Docker</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12-postgresql-amb-docker-compose">1.2 PostgreSQL amb Docker Compose</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#13-crear-una-connexio-des-de-dbeaver-al-servidor-postgresql-creat-amb-docker">1.3 Crear una connexió des de DBeaver al servidor PostgreSQL creat amb Docker</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#14-crear-bases-de-dades-dins-de-la-connexio-postgres_local">1.4 Crear bases de dades dins de la connexió postgres_local</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../2_ddl/">2. DDL</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../exercicis_de_tot_el_tema/">Exercicis del tot el tema</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BD - Bases de Dades</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">POSTGRESQL - DDL</li>
+      <li class="breadcrumb-item active">1. Introducció</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="1-introduccio">1. Introducció</h1>
+<p>Fins ara hem treballat amb un servidor PostgreSQL al núvol que tenia dues bases de dades: <strong>geo i factura</strong>.
+En aquestes bases de dades únicament fèiem consultes (SELECT) i ningú modificava l’estructura ni les dades, per això no hi havia conflictes.</p>
+<p>A partir d’ara, amb les sentències de DDL i DML, farem el següent:</p>
+<ul>
+<li><strong>DDL</strong> → crear i eliminar taules, columnes, esquemes…</li>
+<li><strong>DML</strong> → inserir, modificar i eliminar dades</li>
+</ul>
+<p>Per tant, no ens convé en absolut treballar sobre la Base de Dades <strong>geo</strong> ni sobre <strong>factura</strong>, ja que el que faríem seria "boicotejar-nos" entre nosaltres. </p>
+<p>Així, a partir d’ara, en lloc de fer ús d’un servidor allotjat al núvol, treballareu amb un servidor PostgreSQL de manera local, utilitzant contenidors <strong>Docker</strong>. En tot cas, seguirem utilitzant el client <strong>DBeaver</strong> per connectar-nos i gestionar la base de dades.
+Treballarem amb dues Bases de Dades <strong>noves</strong> en local utilizant contenidors:</p>
+<ul>
+<li><strong>proves</strong>: servirà per a fer proves, com el seu propi nom indica. Tots els exemples del tema els farem en aquesta BD.</li>
+<li><strong>factura_local</strong>: tindreu una Base de Dades per a cadascú en local. És on haureu de treballar els exercicis.</li>
+</ul>
+<p>Anem a fer la instal·lació: </p>
+<h2 id="11-installacio-de-docker">1.1 Instal·lació de Docker</h2>
+<p><strong class="azul">🔹Windows</strong></p>
+<p>1) Verifica els requisits i activa la virtualització/WSL2:  </p>
+<blockquote>
+<p>Activa WSL 2 i comprova la versió amb: <strong class="verde">wsl --version</strong> (Si no apareix, instal·la-ho/actualitza-ho amb: <strong class="verde">wsl --install</strong> / <strong class="verde">wsl --update</strong>).  </p>
+</blockquote>
+<p>2) Instal·la Docker Desktop: <a href="https://www.docker.com/products/docker-desktop">https://www.docker.com/products/docker-desktop</a> <br />
+3) Assegura’t que Docker Compose està disponible (normalment ve inclòs amb Docker Desktop):  </p>
+<blockquote>
+<p>Executa: <strong class="verde">docker compose version</strong> i, si respon amb una versió (per exemple, «Docker Compose version vX.Y.Z»), està instal·lat i accessible en el teu PATH.  </p>
+</blockquote>
+<p><strong class="azul">🔹Ubuntu</strong> (en les aules del centre educatiu no fa falta fer la instal·lació)</p>
+<p>1) Instal·la Docker: </p>
+<pre><code>sudo apt update
+sudo apt install docker.io
+</code></pre>
+<p>2) Instal·la Docker Compose:</p>
+<pre><code>sudo apt install docker-compose
+</code></pre>
+<h2 id="12-postgresql-amb-docker-compose">1.2 PostgreSQL amb Docker Compose</h2>
+<p>1) En una carpeta, per exemple, <strong class="verde">docker/postgres_local</strong>, <strong>crea l’arxiu</strong> buit <strong class="verde">docker-compose.yml</strong>.
+  El fitxer <strong class="verde">docker-compose.yml</strong> defineix el contenidor de PostgreSQL, la seva configuració i els ports per a connectar-se des de DBeaver. </p>
+<p>Copia el contingut següent dins del fitxer <strong class="verde">docker-compose.yml</strong></p>
+<pre><code>services:
+  postgres:
+    image: postgres:16.4
+    container_name: postgres_local
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_data:
+</code></pre>
+<p>2) <strong>Alça el servei</strong>:<br />
+  En la carpeta on està el <strong class="verde">docker-compose.yml</strong>, executa en la terminal:</p>
+<pre><code>docker compose up -d
+</code></pre>
+<p><strong>Explicació dels camps principals:</strong></p>
+<ul>
+<li><strong>image</strong>: indica quina imatge de PostgreSQL utilitzar (en aquest exemple, la versió 16.4).  </li>
+<li><strong>container_name</strong>: nom que tindrà el contenidor.   </li>
+<li><strong>environment</strong>: defineix l’usuari, la contrasenya i la base de dades que es crearan inicialment.  </li>
+<li><strong>ports</strong>: mapeja el port local 5432 al port 5432 del contenidor, permetent connectar-se des de DBeaver.  </li>
+<li><strong>volumes</strong>: manté les dades persistents encara que el contenidor s’aturi o es torni a crear.  </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Consell</p>
+<p>Pots personalitzar POSTGRES_USER, POSTGRES_PASSWORD i POSTGRES_DB segons les necessitats del teu projecte.</p>
+</div>
+<h2 id="13-crear-una-connexio-des-de-dbeaver-al-servidor-postgresql-creat-amb-docker">1.3 Crear una connexió des de DBeaver al servidor PostgreSQL creat amb Docker</h2>
+<p>Una vegada el contenidor PostgreSQL està en funcionament, pots connectar-te des de DBeaver seguint aquests passos:</p>
+<p>1) Obre DBeaver i connecta’t al servidor PostgreSQL utilitzant les credencials definides en el <strong class="verde">docker-compose.yml</strong>. <br />
+2) Fes clic a <strong>Database → New Database Connection</strong>. <br />
+3) Selecciona <strong>PostgreSQL</strong> i fes clic a Next.<br />
+4) Introdueix les dades de connexió definides en el fitxer docker-compose.yml:  </p>
+<ul>
+<li><strong>Host</strong>: <strong class="verde">localhost</strong></li>
+<li><strong>Port</strong>: <strong class="verde">5432</strong></li>
+<li><strong>Database</strong>: <strong class="verde">Postgres</strong></li>
+<li><strong>Username</strong>: <strong class="verde">admin</strong></li>
+<li><strong>Password</strong>: <strong class="verde">admin</strong></li>
+</ul>
+<p><img alt="alt text" src="../image-1.png" /></p>
+<p>5) Fes clic a <strong>Test Connection/Probar Conexión</strong> per comprovar que la connexió funciona correctament.<br />
+6) Si tot és correcte, fes clic a <strong>Aceptar</strong>. Ara podràs veure i gestionar la base de dades PostgreSQL des de DBeaver.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Si tens problemes de connexió, comprova que el contenidor està en funcionament amb <strong>docker ps</strong> i que el port <strong>5432</strong> no està ocupat per un altre servei.</p>
+</div>
+<h2 id="14-crear-bases-de-dades-dins-de-la-connexio-postgres_local">1.4 Crear bases de dades dins de la connexió postgres_local</h2>
+<p>Creem les bases de dades <strong>proves</strong> i <strong>factura_local</strong> dins de la connexió <strong>postgres_local</strong> perquè aquesta connexió correspon al servidor PostgreSQL que tenim instal·lat en local amb <strong>Docker</strong>.</p>
+<p>1) Fes clic dret sobre la connexió: <strong>postgres_local</strong>.<br />
+2) Selecciona:  <strong>Create → Database</strong><br />
+3) En la finestra escriu el nom de la base de dades: <strong>proves</strong>  </p>
+<p><img alt="alt text" src="../image.png" /></p>
+<p>4) Fes clic dret sobre la connexió <strong>postgres_local</strong>.<br />
+5) Prem <strong>Refresh / Actualitzar</strong>.<br />
+6) Comprova que apareix la base de dades proves en la llista.<br />
+<strong class="rojo">7) Fes els mateixos passos per a la base de dades:</strong> <strong>factura_local</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">IMPORTANT</p>
+<p>Us recomane que us creeu una altra connexió per a cadascuna de les Bases de Dades anteriors. D'aquesta manera, segurament, en tindreu tres connexions: la de <strong>postgres_local</strong> , la de <strong>factura_local</strong>  i  la de <strong>proves</strong>,  a més de les connexions al servidor al núvol, <strong>geo</strong> i <strong>factura</strong>.</p>
+</div>
+<!--
+Fins el moment només hem vist una sentència, el SELECT, una sentència molt
+potent per a poder consultar el contingut de les taules d'una Base de Dades.
+Però el llenguatge SQL és més complet, i permet també crear l'estructura de
+les taules i altres objectes. I també ens permetrà manipular la informació,
+introduint dades noves, eliminant-ne o modificant les ja existents.
+
+Durant tota aquesta part de SQL farem consultes per a crear o
+modificar taules.
+
+No ens convé en absolut treballar sobre la Base de Dades **geo** ni sobre **factura** , ja que el que faríem seria "boicotejar-nos" entre nosaltres.
+
+
+
+Treballarem amb dues Bases de Dades noves:
+
+  * **proves** (connectant-nos com l'usuari **proves**): servirà per a fer proves, com el seu propi nom indica. Tots els exemples els farem en aquesta BD
+  * **f_grup_9999x** , on grup és el codi del vostre grup (p.ex 1cfsg, 1cfsj, 1cfsl...), 9999 seran les 4 últimes xifres del vostre DNI, i x és la lletra del vostre NIF. És a dir, tindreu una Base de Dades per a cadascú de vosaltres, i un usuari amb el mateix nom. És on haureu de treballar els exercicis.
+
+Us recomane vivament que us creeu una altra connexió per a cadascuna de les
+Bases de Dades anteriors. D'aquesta manera, segurament en tindreu quatre
+connexions: la de **geo** , la de **factura** , la de **proves** i la de
+**f_grup_9999x** (substituint per les dades del vostre grup i NIF)
+
+
+-->
+
+<p>Llicenciat sota la  <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Llicència Creative Commons Reconeixement NoComercial
+CompartirIgual 3.0</a></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../2_ddl/" class="btn btn-neutral float-right" title="2. DDL">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="../2_ddl/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
