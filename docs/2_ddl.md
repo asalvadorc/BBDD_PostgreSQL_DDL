@@ -160,7 +160,7 @@ Els tipus de restriccions que podem definir són:
 
 > Per exemple, d'aquesta manera definirem la taula EMPLEAT3 (com la de
 > l'apartat anterior) amb el camp dni com a clau principal. Recordeu que l'heu
-> d'esborrar primer (potser no l'estigueu visualitzant en pgAdmin, però sí que
+> d'esborrar primer (potser no l'estigueu visualitzant, però sí que
 > està creada; refresqueu constantment les taules per saber la situació
 > actual)
 
@@ -174,7 +174,7 @@ Els tipus de restriccions que podem definir són:
             data_incorporacio DATE DEFAULT CURRENT_DATE )
 
 !!!Note "Nota"
-    Podeu comprovar que si no poseu nom a la restrició, és a dir si poseu
+    Podeu comprovar que, si no poseu nom a la restrició, és a dir, si poseu
     directament dni **TEXT(10) PRIMARY KEY**, i aneu al disseny de la taula,
     PostgreSQL posa automàticament un nom a la restricció format pel nom de la taula seguit de **_pkey**.
 
